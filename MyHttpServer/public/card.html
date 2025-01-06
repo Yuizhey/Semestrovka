@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/card.css">
+</head>
+<body>
+    <div class="first-image" onclick="location.href='index.html'">
+        <img src="images/header-image.png" alt="LordFilm" class="first-first-logo">
+    </div>
+    <header class="header">
+        <div class="header-first">
+            <img src="images/header-logo.png" alt="LordFilm" class="header-first-logo">
+            <ul class="header-first-list">
+                <li class="header-first-list-item">ФИЛЬМЫ</li>
+                <li class="header-first-list-item">СЕРИАЛЫ</li>
+                <li class="header-first-list-item">МУЛЬТФИЛЬМЫ</li>
+            </ul>
+            <form class="header-form">
+                <div class="header-form-div">
+                    <input type="text" placeholder="Введите название" class="header-form-input">
+                    <button type="submit"><img src="images/icons8-search-50.png" alt="" class="header-form-div-image"></button>
+                </div>
+            </form>
+            <div class="header-first-login" id="openModal">
+                 Войти
+            </div>
+        </div>
+        <div class="header-second">
+            <ul class="header-second-list">
+                <li class="header-second-list-item"><a href="" class="header-second-list-item-link" id="header-link-1">Фильмы 2024</a></li>
+                <li class="header-second-list-item"><a href="" class="header-second-list-item-link" id="header-link-2">Недельный ТОП-50</a></li>
+                <li class="header-second-list-item"><a href="" class="header-second-list-item-link" id="header-link-3">Новости</a></li>
+                <li class="header-second-list-item"><a href="" class="header-second-list-item-link" id="header-link-4">Netflix</a></li>
+                <li class="header-second-list-item"><a href="" class="header-second-list-item-link" id="header-link-5">Marvel</a></li>
+                <li class="header-second-list-item"><a href="" class="header-second-list-item-link" id="header-link-6">Сериалы 2024</a></li>
+                <li class="header-second-list-item"><a href="" class="header-second-list-item-link" id="header-link-7">Подборки</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Модальное окно -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2>Авторизация</h2>
+            <img src="https://via.placeholder.com/50" alt="User Icon">
+            <form id="authForm">
+                <input type="text" id="username" placeholder="Ваш логин" required>
+                <input type="password" id="password" placeholder="Ваш пароль" required>
+                <div class="remember">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Запомнить</label>
+                </div>
+                <button type="submit">ВОЙТИ НА САЙТ</button>
+                <div class="links">
+                    <a href="#">Регистрация</a>
+                    <a href="#">Восстановить пароль</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно кабинета -->
+    <div id="cabinetModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeCabinetModal">&times;</span>
+            <h2 id="usernameDisplay">{Login}</h2>
+            <img src="https://via.placeholder.com/50" alt="User Icon">
+            <div class="cabinet-options">
+                <button>Мой профиль</button>
+                <button>Мои просмотры</button>
+                <button>Мои закладки (0)</button>
+                <button id="logoutButton">Выйти</button>
+            </div>
+        </div>
+    </div>
+    
+    <main class="main">
+        <section class="main-navbar">
+            <a href="/films" class="main-navbar-index">Фильмы <span>»</span>  </a>
+            <p class="main-navbar-filmName"> Веном 2 (2021)</p>
+        </section>
+
+        <section class="main-filmAbout">
+            <div class="main-filmAbout-image">
+                <div class="main-filmAbout-image-photo">
+                    <div class="main-photo-year">
+                        <p class="main-photo-year-info">2021</p>
+                    </div>
+                    <img src="images/test-image.jpeg" alt="" class="main-photo-image">
+                </div>
+                <div class="main-filmAbout-image-marks">
+                    <div class="main-marks-positive">
+                        <img src="images/like.png" alt="" class="main-marks-positive-image">
+                        <p class="main-marks-positive-count">3333</p>
+                    </div>
+                    <div class="main-marks-negative">
+                        <p class="main-marks-negative-count">3333</p>
+                        <img src="images/dislike.png" alt="" class="main-marks-negative-image">                 
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-filmAbout-info">
+                <h1 class="main-filmAbout-info-title">Веном-2 (2021) Смотреть онлайн</h1>
+                <p class="main-filmAbout-info-description">Более чем через год после тех событий журналист Эдди Брок пытается приспособиться к жизни в качестве хозяина инопланетного симбиота Венома, который наделяет его сверхчеловеческими способностями. Брок пытается возродить свою карьеру и берет интервью у серийного убийцы Клетуса Касади, который по воле случая становится хозяином Карнажа и сбегает из тюрьмы после неудавшейся казни.</p>
+                <div class="main-filmAbout-info-full">
+                    <div class="main-filmAbout-info-fullFirst">
+                        thrhwhtbrwbrwbr
+                    </div>
+                    <div class="main-filmAbout-info-fullSecond">
+                        <div class="fullSecond-quality">
+                            <p class="fullSecond-quality-1">Качество:</p>
+                            <p class="fullSecond-quality-2">HD 720, 1080</p>
+                        </div>
+                        <div class="fullSecond-marks">
+                            <div class="fullSecond-marksKP">
+                                КП 6.1
+                            </div>
+                            <div class="fullSecond-marksIMDB">
+                                IMDB 6.1
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-container">
+                <h2>Поиск по параметрам</h2>
+        
+                <div class="filter-group">
+                    <label for="genre">Выберите жанр</label>
+                    <select id="genre">
+                        <option value="">Выберите жанр</option>
+                        <option value="action">Боевик</option>
+                        <option value="comedy">Комедия</option>
+                        <option value="drama">Драма</option>
+                    </select>
+                </div>
+        
+                <div class="filter-group">
+                    <label for="country">Выберите страну</label>
+                    <select id="country">
+                        <option value="">Выберите страну</option>
+                        <option value="usa">США</option>
+                        <option value="russia">Россия</option>
+                        <option value="japan">Япония</option>
+                    </select>
+                </div>
+        
+                <div class="filter-group">
+                    <label>Год</label>
+                    <input type="range" id="year" min="1915" max="2024" step="1">
+                    <div class="range-labels">
+                        <span>1915</span>
+                        <span>2024</span>
+                    </div>
+                </div>
+        
+                <div class="filter-group">
+                    <label>КП</label>
+                    <input type="range" id="kp" min="0" max="10" step="1">
+                    <div class="range-labels">
+                        <span>0</span>
+                        <span>10</span>
+                    </div>
+                </div>
+        
+                <div class="filter-group toggle-options">
+                    <label><input type="checkbox" id="movies"> Фильмы</label>
+                    <label><input type="checkbox" id="series"> Сериалы</label>
+                    <label><input type="checkbox" id="cartoons"> Мультфильмы</label>
+                    <label><input type="checkbox" id="anime"> Аниме</label>
+                </div>
+        
+                <div class="filter-group">
+                    <label for="sort">Сортировка</label>
+                    <select id="sort">
+                        <option value="default">По умолчанию</option>
+                        <option value="asc">По возрастанию</option>
+                        <option value="desc">По убыванию</option>
+                    </select>
+                </div>
+        
+                <button>ПОИСК</button>
+            </div>
+        </section>
+
+        <section class="main-video">
+            <iframe class="main-video-iframe" src="https://rutube.ru/play/embed/bce4548b11275eaeef0307d7c714f07c/" frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+        </section>
+
+        <section class="main-anotherFilms">
+            <h1 class="main-anotherFilms-title">Умная подборка</h1>
+            <div class="main-anotherFilms-list">
+                <div class="cards-item" onclick="location.href='card.html'">
+                    <div class="cards-item-year">
+                        <p class="cards-item-year-info">2021</p>
+                    </div>
+                    <img src="images/test-image.jpeg" alt="" class="cards-item-img">
+                    <div class="cards-item-info">
+                        <p class="cards-item-info-name">Веном-2</p>
+                    </div>
+                    <div class="cards-item-marks">
+                        <p class="cards-item-marks-first">КП <span class="cards-item-mark">6.1</span></p>
+                        <p class="cards-item-marks-second">IMDB <span class="cards-item-mark">6.1</span></p>
+                    </div>
+                </div>
+                <div class="cards-item" onclick="location.href='card.html'">
+                    <div class="cards-item-year">
+                        <p class="cards-item-year-info">2021</p>
+                    </div>
+                    <img src="images/test-image.jpeg" alt="" class="cards-item-img">
+                    <div class="cards-item-info">
+                        <p class="cards-item-info-name">Веном-2</p>
+                    </div>
+                    <div class="cards-item-marks">
+                        <p class="cards-item-marks-first">КП <span class="cards-item-mark">6.1</span></p>
+                        <p class="cards-item-marks-second">IMDB <span class="cards-item-mark">6.1</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer id="footer" class="footer">
+        <div class="footer-info">
+            <img src="images/footer-logo.png" alt="logo" class="footer-info-logo">
+            <p class="footer-info-firstString">lordfilm - сайт лордфильм онлайн в хорошем качестве бесплатно.</p>
+            <p class="footer-info-secondString"><u class="footer-info-secondString-down">lordfilm.com@gmail.com</u> - почта для обратной связи.</p>
+        </div>
+        <div class="footer-menu">
+            <p class="footer-menu-title">Главное меню</p>
+            <ul class="footer-menu-list">
+                <li class="footer-menu-list-item"><a href="" class="footer-menu-list-item-link">Фильмы</a></li>
+                <li class="footer-menu-list-item"><a href="" class="footer-menu-list-item-link">Сериалы</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="scripts/modalWindow.js"></script>
+</body>
+</html>

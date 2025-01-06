@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лордфильм</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="first-image" onclick="location.href='index.html'">
+        <img src="images/header-image.png" alt="LordFilm" class="first-first-logo">
+    </div>
+    <header class="header">
+        <div class="header-first">
+            <img src="images/header-logo.png" alt="LordFilm" class="header-first-logo">
+            <ul class="header-first-list">
+                <li class="header-first-list-item">ФИЛЬМЫ</li>
+                <li class="header-first-list-item">СЕРИАЛЫ</li>
+                <li class="header-first-list-item">МУЛЬТФИЛЬМЫ</li>
+            </ul>
+            <form class="header-form">
+                <div class="header-form-div">
+                    <input type="text" placeholder="Введите название" class="header-form-input">
+                    <button type="submit"><img src="images/icons8-search-50.png" alt="" class="header-form-div-image"></button>
+                </div>
+            </form>
+            <div class="header-first-login" id="openModal">
+                 {data}
+            </div>
+        </div>
+        <div class="header-second">
+            <ul class="header-second-list">
+                <li class="header-second-list-item"><a href="" class="header-second-list-item-link" id="header-link-1">Фильмы 2024</a></li>
+                <li class="header-second-list-item"><a href="" class="header-second-list-item-link" id="header-link-2">Недельный ТОП-50</a></li>
+                <li class="header-second-list-item"><a href="" class="header-second-list-item-link" id="header-link-3">Новости</a></li>
+                <li class="header-second-list-item"><a href="" class="header-second-list-item-link" id="header-link-4">Netflix</a></li>
+                <li class="header-second-list-item"><a href="" class="header-second-list-item-link" id="header-link-5">Marvel</a></li>
+                <li class="header-second-list-item"><a href="" class="header-second-list-item-link" id="header-link-6">Сериалы 2024</a></li>
+                <li class="header-second-list-item"><a href="" class="header-second-list-item-link" id="header-link-7">Подборки</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Модальное окно авторизации-->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2>Авторизация</h2>
+            <img src="https://via.placeholder.com/50" alt="User Icon">
+            <form id="authForm" method="post" action="/films">
+                <input type="text" id="username" placeholder="Ваш логин" required name="login">
+                <input type="text" id="password" placeholder="Ваш пароль" required name="password">
+<!--                <div class="remember">-->
+<!--                    <input type="checkbox" id="rememberMe">-->
+<!--                    <label for="rememberMe">Запомнить</label>-->
+<!--                </div>-->
+                <button type="">ВОЙТИ НА САЙТ</button>
+                <div class="links">
+                    <a href="#">Регистрация</a>
+                    <a href="#">Восстановить пароль</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Модальное окно кабинета -->
+    <div id="cabinetModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeCabinetModal">&times;</span>
+            <h2 id="usernameDisplay">{Login}</h2>
+            <img src="https://via.placeholder.com/50" alt="User Icon">
+            <div class="cabinet-options">
+                <button>Мой профиль</button>
+                <button>Мои просмотры</button>
+                <button>Мои закладки (0)</button>
+                <button id="logoutButton">Выйти</button>
+            </div>
+        </div>
+    </div>
+
+        <main id="main" class="main">
+        <section class="main">
+            <div class="main-buttons">
+                <div class="main-button-films">Фильмы</div>
+                <div class="main-button-popular">Популярные</div>
+                <div class="main-button-new">Новинки</div>
+            </div>
+            <div class="main-cards">
+                {items}
+<!--                <div class="cards-item" onclick="location.href='card.html'">-->
+<!--                    <div class="cards-item-year">-->
+<!--                        <p class="cards-item-year-info">2021</p>-->
+<!--                    </div>-->
+<!--                    <img src="images/test-image.jpeg" alt="" class="cards-item-img">-->
+<!--                    <div class="cards-item-info">-->
+<!--                        <p class="cards-item-info-name">Веном-2</p>-->
+<!--                    </div>-->
+<!--                    <div class="cards-item-marks">-->
+<!--                        <p class="cards-item-marks-first">КП <span class="cards-item-mark">6.1</span></p>-->
+<!--                        <p class="cards-item-marks-second">IMDB <span class="cards-item-mark">6.1</span></p>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-info">
+            <img src="images/footer-logo.png" alt="logo" class="footer-info-logo">
+            <p class="footer-info-firstString">lordfilm - сайт лордфильм онлайн в хорошем качестве бесплатно.</p>
+            <p class="footer-info-secondString"><u class="footer-info-secondString-down">lordfilm.com@gmail.com</u> - почта для обратной связи.</p>
+        </div>
+        <div class="footer-menu">
+            <p class="footer-menu-title">Главное меню</p>
+            <ul class="footer-menu-list">
+                <li class="footer-menu-list-item"><a href="" class="footer-menu-list-item-link">Фильмы</a></li>
+                <li class="footer-menu-list-item"><a href="" class="footer-menu-list-item-link">Сериалы</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="scripts/modalWindow.js"></script>
+</body>
+</html>
