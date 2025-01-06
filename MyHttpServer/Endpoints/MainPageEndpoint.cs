@@ -4,6 +4,7 @@ using HttpServerLibrary.Attributes;
 using HttpServerLibrary.Configurations;
 using HttpServerLibrary.Core;
 using HttpServerLibrary.Core.HttpResponse;
+using MyHttpServer.Helpers;
 using MyORMLibrary;
 using MyServer.services;
 using Server.Models;
@@ -13,7 +14,7 @@ namespace MyHttpServer.Endpoints;
 public class MainPageEndpoint : EndpointBase
 {
     [Get("films")]
-    public IHttpResponseResult GetPage()
+    public IHttpResponseResult GetMainPage()
     {
         string renderedHtml;
         var engine = new HtmlTemplateEngine();
@@ -25,39 +26,59 @@ public class MainPageEndpoint : EndpointBase
         {
             var context = new OrmContext<Movie>(dbConnection);
             var movies = context.GetAll("Movies"); // Получение всех записей из таблицы
-    
-            var itemTemplate = @"
-                <div class='cards-item' onclick='location.href=""card.html""'>
-                    <div class='cards-item-year'>
-                        <p class='cards-item-year-info'>{releaseyear}</p>
-                    </div>
-                    <img src='images/test-image.jpeg' alt='' class='cards-item-img'>
-                    <div class='cards-item-info'>
-                        <p class='cards-item-info-name'>{rutitle}</p>
-                    </div>
-                    <div class='cards-item-marks'>
-                        <p class='cards-item-marks-first'>КП <span class='cards-item-mark'>{status}</span></p>
-                        <p class='cards-item-marks-second'>IMDB <span class='cards-item-mark'>{status}</span></p>
-                    </div>
-                </div>";
+            var moviesId = movies.Select(i => i.Id).ToList();
+            var contextSecond = new OrmContext<MovieStatistic>(dbConnection);
+            var movieStats = contextSecond.GetAll("MovieStatistic").Where(i => moviesId.Contains(i.Id)).ToList(); // Убедитесь, что movieStats в виде списка
+            var mainModel = new List<MainPageMovie>();
+            var movieStatsDictionary = movieStats.ToDictionary(s => s.MovieId);
+            for (int i = 0; i < movies.Count; i++)
+            {
+                var movieId = movies[i].Id;
+                if (movieStatsDictionary.TryGetValue(movieId, out var movieStat))
+                {
+                    mainModel.Add(new MainPageMovie
+                    {
+                        Id = movies[i].Id,
+                        RuTitle = movies[i].RuTitle,
+                        ReleaseYear = movies[i].ReleaseYear,
+                        ImageSource = movies[i].ImageSource,
+                        KP_Rating = movieStat.KP_Rating,
+                        IMDB_Rating = movieStat.IMDB_Rating
+                    });
+                }
+                else
+                {
+                    mainModel.Add(new MainPageMovie
+                    {
+                        Id = movies[i].Id,
+                        RuTitle = movies[i].RuTitle,
+                        ReleaseYear = movies[i].ReleaseYear,
+                        ImageSource = movies[i].ImageSource,
+                        KP_Rating = 0, 
+                        IMDB_Rating = 0 
+                    });
+                }
+            }
+
+            var itemTemplate = TemplateStorage.MovieCardTemplate;
 
             
             // Преобразуем данные в шаблон
-            renderedHtml = engine.Render(fileText, movies, itemTemplate);
+            renderedHtml = engine.Render(fileText, mainModel, itemTemplate);
         }
-        if (!IsAuthorized(Context))
+        if (!AuthorizedCheck.IsAuthorized(Context))
         {
-            return Html(engine.Render(renderedHtml, "{data}", "ВОЙТИ"));
+            return Html(engine.Render(renderedHtml, "{data}", TemplateStorage.UnauthorizedPlaceholder));
         }
     
-        return Html(engine.Render(renderedHtml, "{data}", "КАБИНЕТ"));
+        return Html(engine.Render(renderedHtml, "{data}", TemplateStorage.AuthorizedPlaceholder));
     }
 
 
     [Post("films")]
     public IHttpResponseResult Login(string login, string password)
     {
-        if (IsAuthorized(Context))
+        if (AuthorizedCheck.IsAuthorized(Context))
         {
             return Redirect("/films");
         }
@@ -66,7 +87,7 @@ public class MainPageEndpoint : EndpointBase
         var context = new OrmContext<User>(new SqlConnection(AppConfig.GetInstance().ConnectionString));
 
         // Ищем пользователя по логину
-        var user = context.FirstOrDefaultByLogin(login);
+        var user = context.FirstOrDefault(u => u.Login == login);
     
         // Если пользователя нет или пароль неверный
         if (user == null || user.Password != password)
@@ -90,16 +111,5 @@ public class MainPageEndpoint : EndpointBase
 
         // Перенаправляем на дашборд после успешного логина
         return Redirect("/films");
-    }
-    private bool IsAuthorized(HttpRequestContext context)
-    {
-        // Проверка наличия куки с session-token
-        var cookie = context.Request.Cookies.FirstOrDefault(c => c.Name == "session-token");
-        if (cookie != null)
-        {
-            var isValid = SessionStorage.ValidateToken(cookie.Value);
-            return isValid;
-        }
-        return false;  
     }
 }
