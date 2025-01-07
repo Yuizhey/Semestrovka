@@ -25,7 +25,7 @@
                 </div>
             </form>
             <div class="header-first-login" id="openModal">
-                 Войти
+                 {data}
             </div>
         </div>
         <div class="header-second">
@@ -81,52 +81,10 @@
     <main class="main">
         <section class="main-navbar">
             <a href="/films" class="main-navbar-index">Фильмы <span>»</span>  </a>
-            <p class="main-navbar-filmName"> Веном 2 (2021)</p>
+            <p class="main-navbar-filmName">{rutitle}</p>
         </section>
 
         <section class="main-filmAbout">
-<!--            <div class="main-filmAbout-image">-->
-<!--                <div class="main-filmAbout-image-photo">-->
-<!--                    <div class="main-photo-year">-->
-<!--                        <p class="main-photo-year-info">2021</p>-->
-<!--                    </div>-->
-<!--                    <img src="images/test-image.jpeg" alt="" class="main-photo-image">-->
-<!--                </div>-->
-<!--                <div class="main-filmAbout-image-marks">-->
-<!--                    <div class="main-marks-positive">-->
-<!--                        <img src="images/like.png" alt="" class="main-marks-positive-image">-->
-<!--                        <p class="main-marks-positive-count">3333</p>-->
-<!--                    </div>-->
-<!--                    <div class="main-marks-negative">-->
-<!--                        <p class="main-marks-negative-count">3333</p>-->
-<!--                        <img src="images/dislike.png" alt="" class="main-marks-negative-image">                 -->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--            <div class="main-filmAbout-info">-->
-<!--                <h1 class="main-filmAbout-info-title">Веном-2 (2021) Смотреть онлайн</h1>-->
-<!--                <p class="main-filmAbout-info-description">Более чем через год после тех событий журналист Эдди Брок пытается приспособиться к жизни в качестве хозяина инопланетного симбиота Венома, который наделяет его сверхчеловеческими способностями. Брок пытается возродить свою карьеру и берет интервью у серийного убийцы Клетуса Касади, который по воле случая становится хозяином Карнажа и сбегает из тюрьмы после неудавшейся казни.</p>-->
-<!--                <div class="main-filmAbout-info-full">-->
-<!--                    <div class="main-filmAbout-info-fullFirst">-->
-<!--                        thrhwhtbrwbrwbr-->
-<!--                    </div>-->
-<!--                    <div class="main-filmAbout-info-fullSecond">-->
-<!--                        <div class="fullSecond-quality">-->
-<!--                            <p class="fullSecond-quality-1">Качество:</p>-->
-<!--                            <p class="fullSecond-quality-2">HD 720, 1080</p>-->
-<!--                        </div>-->
-<!--                        <div class="fullSecond-marks">-->
-<!--                            <div class="fullSecond-marksKP">-->
-<!--                                КП 6.1-->
-<!--                            </div>-->
-<!--                            <div class="fullSecond-marksIMDB">-->
-<!--                                IMDB 6.1-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
             <div class='main-filmAbout-image'>
                 <div class='main-filmAbout-image-photo'>
                     <div class='main-photo-year'>
@@ -147,11 +105,15 @@
             </div>
 
             <div class='main-filmAbout-info'>
-                <h1 class='main-filmAbout-info-title'>{title} ({releaseyear}) Смотреть онлайн</h1>
-                <p class='main-filmAbout-info-description'>{description}</p>
+                <h1 class='main-filmAbout-info-title'>{rutitle}</h1>
+                <p class='main-filmAbout-info-description'>{moviedescription}</p>
                 <div class='main-filmAbout-info-full'>
                     <div class='main-filmAbout-info-fullFirst'>
-                        {additionalInfo}
+                        <p>Название: {rutitle}</p>
+                        <p>Год выхода: {releaseyear}</p>
+                        <p>Страна: {country}</p>
+                        <p>Оригинальное название: {engtitle}</p>
+                        <p>Режиссёр: {name}</p>                        
                     </div>
                     <div class='main-filmAbout-info-fullSecond'>
                         <div class='fullSecond-quality'>
@@ -232,7 +194,7 @@
         </section>
 
         <section class="main-video">
-            <iframe class="main-video-iframe" src="https://rutube.ru/play/embed/bce4548b11275eaeef0307d7c714f07c/" frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+            <iframe class="main-video-iframe" src="{videourl}" frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
         </section>
 
         <section class="main-anotherFilms">

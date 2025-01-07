@@ -63,4 +63,51 @@ public static class TemplateStorage
 
     public static string UnauthorizedPlaceholder => "ВОЙТИ";
     public static string AuthorizedPlaceholder => "КАБИНЕТ";
+    public static string AdminUsersTable => @"
+                <tr>
+                    <td>{id}</td>
+                    <td>{login}</td>
+                    <td>{password}</td>
+                    <td>{email}</td>
+                </tr>";
+    
+    public static string AdminProducerTable => @"
+                <tr>
+                    <td>{id}</td>
+                    <td>{name}</td>
+                    <td>{directedfilmscount}</td>
+                    <td>{birthyear}</td>
+                    <td>{birthcountry}</td>
+                </tr>";
+    
+    public static string AdminMoviesTable => @"
+                <tr>
+                    <td>{id}</td>
+                    <td>{rutitle}</td>
+                    <td>{releaseyear}</td>
+                    <td>{imagesource}</td>
+                    <td>{status}</td>
+                </tr>";
+    
+    public static string AdminMovieDetailsTable => @"
+                <tr>
+                    <td>{id}</td>
+                    <td>{moviedescription}</td>
+                    <td>{country}</td>
+                    <td>{producerid}</td>
+                    <td>{engtitle}</td>
+                    <td>{movieid}</td>
+                    <td>{quality}</td>
+                    <td>{videourl}</td>
+                </tr>";
+    
+    public static string AdminMovieStatsTable => @"
+                <tr>
+                    <td>{id}</td>
+                    <td>{kp_rating}</td>
+                    <td>{imdb_rating}</td>
+                    <td>{likes_count}</td>
+                    <td>{dislikes_count}</td>
+                    <td>{movie_id}</td>
+                </tr>";
 }

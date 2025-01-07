@@ -18,5 +18,5 @@ public class MovieStatistic
     public int Dislikes_Count { get; set; }
 
     // Идентификатор фильма (внешний ключ)
-    public int MovieId { get; set; }
+    public int Movie_Id { get; set; }
 }

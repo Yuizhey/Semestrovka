@@ -8,4 +8,6 @@ public class MovieDetails
     public int ProducerId { get; set; }
     public string EngTitle { get; set; }
     public int MovieId { get; set; }
+    public string Quality { get; set; }
+    public string VideoURL { get; set; }
 }

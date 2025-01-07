@@ -13,4 +13,6 @@ public class CardPageMovie
     public string MovieDescription { get; set; }
     public string Country { get; set; }
     public string Name { get; set; }
+    public string Quality { get; set; }
+    public string VideoURL { get; set; }
 }

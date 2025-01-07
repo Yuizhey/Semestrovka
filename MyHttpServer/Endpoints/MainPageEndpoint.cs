@@ -30,7 +30,7 @@ public class MainPageEndpoint : EndpointBase
             var contextSecond = new OrmContext<MovieStatistic>(dbConnection);
             var movieStats = contextSecond.GetAll("MovieStatistic").Where(i => moviesId.Contains(i.Id)).ToList(); // Убедитесь, что movieStats в виде списка
             var mainModel = new List<MainPageMovie>();
-            var movieStatsDictionary = movieStats.ToDictionary(s => s.MovieId);
+            var movieStatsDictionary = movieStats.ToDictionary(s => s.Movie_Id);
             for (int i = 0; i < movies.Count; i++)
             {
                 var movieId = movies[i].Id;
@@ -102,7 +102,6 @@ public class MainPageEndpoint : EndpointBase
             HttpOnly = true,
             Secure = false, // Если вы работаете не через HTTPS
             Path = "/",     // Делаем cookie доступными для всех маршрутов
-            Expires = DateTime.Now.AddDays(1)
         };
         Context.Response.Cookies.Add(nameCookie);
 

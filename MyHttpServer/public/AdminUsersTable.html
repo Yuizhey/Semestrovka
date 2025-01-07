@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/adminTable.css">
+</head>
+<body>
+    <button class="back-button" onclick="location.href='/admin'">Назад</button>
+    <div class="flex-container">
+        <!-- Таблица -->
+        <div class="container">
+            <h1>Таблица: Users</h1>
+            <table>
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Login</th>
+                    <th>Password</th>
+                    <th>Email</th>
+                </tr>
+                </thead>
+                <tbody id="usersTableBody">
+                    {items}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Форма -->
+        <div class="form-container">
+            <h2>Добавить запись</h2>
+            <form id="userForm">
+                <label for="login">Login:</label>
+                <input type="text" id="login" name="login" onchange="checkForm()" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" onchange="checkForm()" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" onchange="checkForm()" required>
+
+                <button type="submit" id="submitButton" disabled>Добавить</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.getElementById('userForm').addEventListener('submit', submitForm);
+        function checkForm() {
+            const login = document.getElementById('login').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const email = document.getElementById('email').value.trim();
+
+            // Если все поля заполнены, включаем кнопку
+            const submitButton = document.getElementById('submitButton');
+            if (login && password && email) {
+                submitButton.disabled = false;
+            } else {
+                submitButton.disabled = true;
+            }
+        }
+        async function submitForm(event) {
+            event.preventDefault();
+            console.log("Form submitted");
+            const form = document.getElementById('userForm');
+            const formData = new FormData(form);
+
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                console.log("data")
+                const response = await fetch('/admin/users/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                console.log("send")
+                if (response.ok) {
+                    const result = await response.json();
+                    alert(result.message);
+
+                    // Обновляем таблицу на странице
+                    const tbody = document.getElementById('usersTableBody');
+                    const newRow = `
+                        <tr>
+                            <td>UserId</td>
+                            <td>${user.login}</td>
+                            <td>${user.password}</td>
+                            <td>${user.email}</td>
+                        </tr>`;
+                    tbody.innerHTML += newRow;
+
+                    // Очистка формы
+                    form.reset();
+                } else {
+                    const error = await response.json();
+                    alert('Ошибка: ' + error.message);
+                }
+            } catch (err) {
+                console.error('Ошибка отправки:', err);
+                alert('Произошла ошибка при добавлении записи.');
+            }
+        }
+    </script>
+</body>
+</html>

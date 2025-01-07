@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/adminTable.css">
+</head>
+<body>
+<button class="back-button" onclick="location.href='/admin'">Назад</button>
+<div class="flex-container">
+    <!-- Таблица -->
+    <div class="container">
+        <h1>Таблица: MovieDetails</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>MovieDescription</th>
+                <th>Country</th>
+                <th>ProducerId</th>
+                <th>EngTitle</th>
+                <th>MovieId</th>
+                <th>Quality</th>
+                <th>VideoURL</th>
+            </tr>
+            </thead>
+            <tbody>
+            {items}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Форма -->
+    <div class="form-container">
+        <h2>Добавить запись</h2>
+        <form id="addMovieDetailsForm" action="/admin/movieDetails/add" method="POST">
+            <label for="movieDescription">Movie Description:</label>
+            <input type="text" id="movieDescription" name="movieDescription" required>
+
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" required>
+
+            <label for="producerId">Producer ID:</label>
+            <input type="number" id="producerId" name="producerId" required>
+
+            <label for="engTitle">English Title:</label>
+            <input type="text" id="engTitle" name="engTitle" required>
+
+            <label for="movieId">Movie ID:</label>
+            <input type="number" id="movieId" name="movieId" required>
+
+            <label for="quality">Quality:</label>
+            <input type="text" id="quality" name="quality" required>
+
+            <label for="videoUrl">Video URL:</label>
+            <input type="text" id="videoUrl" name="videoUrl" required>
+
+            <button type="submit">Добавить</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

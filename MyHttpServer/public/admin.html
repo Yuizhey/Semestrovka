@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aдмин панель</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Админ Панель</h1>
+        <p>Выберите таблицу для редактирования:</p>
+        <div class="table-list">
+          <div class="table-item" onclick="location.href='/admin/users'">Таблица: Users</div>
+          <div class="table-item" onclick="location.href='/admin/producer'">Таблица: Producer</div>
+          <div class="table-item" onclick="location.href='/admin/movies'">Таблица: Movies</div>
+          <div class="table-item" onclick="location.href='/admin/movie-details'">Таблица: MovieDetails</div>
+          <div class="table-item" onclick="location.href='/admin/movie-stats'">Таблица: MovieStatistic</div>
+        </div>
+      </div>
+</body>
+</html>
