@@ -22,7 +22,7 @@ public class CardPageEndpoint : EndpointBase
         using (var dbConnection = new SqlConnection(AppConfig.GetInstance().ConnectionString))
         {
             var context = new OrmContext<Movie>(dbConnection);
-            var movie = context.ReadById(id);
+            var movie = context.ReadById(id,"Movies");
             // var contextSecond = new OrmContext<MovieStatistic>(dbConnection);// Получение всех записей из таблицы
             // var stats = contextSecond.FirstOrDefault(m => m.Movie_Id == movie.Id);
             // var contextThird = new OrmContext<MovieDetails>(dbConnection);

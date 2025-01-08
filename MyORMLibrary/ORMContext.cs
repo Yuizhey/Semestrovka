@@ -13,9 +13,9 @@ public class OrmContext<T> where T : class, new()
         _dbConnection = dbConnection;
     }
 
-    public T ReadById(int Id)
+    public T ReadById(int Id, string tableName)
     {
-        string query = $"SELECT * FROM {typeof(T).Name}s WHERE Id = @Id";
+        string query = $"SELECT * FROM {tableName} WHERE Id = @Id";
 
         try
         {

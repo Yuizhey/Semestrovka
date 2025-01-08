@@ -7,27 +7,28 @@
     <link rel="stylesheet" href="../css/adminTable.css">
 </head>
 <body>
-    <button class="back-button" onclick="location.href='/admin'">Назад</button>
-    <div class="flex-container">
-        <!-- Таблица -->
-        <div class="container">
-            <h1>Таблица: Users</h1>
-            <table>
-                <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Login</th>
-                    <th>Password</th>
-                    <th>Email</th>
-                </tr>
-                </thead>
-                <tbody id="usersTableBody">
-                    {items}
-                </tbody>
-            </table>
-        </div>
+<button class="back-button" onclick="location.href='/admin'">Назад</button>
+<div class="flex-container">
+    <!-- Таблица -->
+    <div class="container">
+        <h1>Таблица: Users</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Login</th>
+                <th>Password</th>
+                <th>Email</th>
+            </tr>
+            </thead>
+            <tbody id="usersTableBody">
+            {items}
+            </tbody>
+        </table>
+    </div>
 
-        <!-- Форма -->
+    <!-- Формы -->
+    <div class="form-section">
         <div class="form-container">
             <h2>Добавить запись</h2>
             <form id="userForm">
@@ -43,64 +44,119 @@
                 <button type="submit" id="submitButton" disabled>Добавить</button>
             </form>
         </div>
+
+        <div class="form-container">
+            <h2>Удалить запись</h2>
+            <form id="deleteUserForm">
+                <label for="deleteId">ID:</label>
+                <input type="number" id="deleteId" name="id" onchange="checkDeleteForm()" required>
+
+                <button type="submit" id="deleteButton" disabled>Удалить</button>
+            </form>
+        </div>
     </div>
-    <script>
-        document.getElementById('userForm').addEventListener('submit', submitForm);
-        function checkForm() {
-            const login = document.getElementById('login').value.trim();
-            const password = document.getElementById('password').value.trim();
-            const email = document.getElementById('email').value.trim();
+</div>
+<script>
+    document.getElementById('userForm').addEventListener('submit', submitForm);
+    function checkForm() {
+        const login = document.getElementById('login').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const email = document.getElementById('email').value.trim();
 
-            // Если все поля заполнены, включаем кнопку
-            const submitButton = document.getElementById('submitButton');
-            if (login && password && email) {
-                submitButton.disabled = false;
-            } else {
-                submitButton.disabled = true;
-            }
-        }
-        async function submitForm(event) {
-            event.preventDefault();
-            console.log("Form submitted");
-            const form = document.getElementById('userForm');
-            const formData = new FormData(form);
+        const submitButton = document.getElementById('submitButton');
+        submitButton.disabled = !(login && password && email);
+    }
+    async function submitForm(event) {
+        event.preventDefault();
+        const form = document.getElementById('userForm');
+        const formData = new FormData(form);
 
-            const data = Object.fromEntries(formData.entries());
+        const data = Object.fromEntries(formData.entries());
 
-            try {
-                console.log("data")
-                const response = await fetch('/admin/users/add', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                console.log("send")
-                if (response.ok) {
-                    const result = await response.json();
-                    alert(result.message);
+        try {
+            const response = await fetch('/admin/users/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            if (response.ok) {
+                const result = await response.json();
 
-                    // Обновляем таблицу на странице
-                    const tbody = document.getElementById('usersTableBody');
-                    const newRow = `
+                const tbody = document.getElementById('usersTableBody');
+                const newRow = `
                         <tr>
-                            <td>UserId</td>
-                            <td>${user.login}</td>
-                            <td>${user.password}</td>
-                            <td>${user.email}</td>
+                            <td>${result.id}</td>
+                            <td>${data.login}</td>
+                            <td>${data.password}</td>
+                            <td>${data.email}</td>
                         </tr>`;
-                    tbody.innerHTML += newRow;
+                tbody.innerHTML += newRow;
 
-                    // Очистка формы
-                    form.reset();
-                } else {
-                    const error = await response.json();
-                    alert('Ошибка: ' + error.message);
-                }
-            } catch (err) {
-                console.error('Ошибка отправки:', err);
-                alert('Произошла ошибка при добавлении записи.');
+                form.reset();
+            } else {
+                const error = await response.json();
+                alert('Ошибка: ' + error.message);
             }
+        } catch (err) {
+            console.error('Ошибка отправки:', err);
+            alert('Произошла ошибка при добавлении записи.');
         }
-    </script>
+    }
+
+    document.getElementById('deleteUserForm').addEventListener('submit', deleteUser);
+    function checkDeleteForm() {
+        const deleteId = document.getElementById('deleteId').value.trim();
+        const deleteButton = document.getElementById('deleteButton');
+        deleteButton.disabled = !deleteId;
+    }
+    async function deleteUser(event) {
+        event.preventDefault();
+
+        const deleteId = document.getElementById('deleteId').value.trim();
+
+        try {
+            // Формируем JSON-объект для отправки
+            const data = { id: deleteId };
+
+            const response = await fetch('/admin/users/delete', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data) // Преобразуем объект в строку JSON
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+
+                if (result.success) {
+
+                    const tbody = document.getElementById('usersTableBody');
+                    const rows = tbody.getElementsByTagName('tr');
+
+                    // Удаляем строку из таблицы с указанным ID
+                    for (let i = 0; i < rows.length; i++) {
+                        const cells = rows[i].getElementsByTagName('td');
+                        if (cells.length > 0 && cells[0].textContent === deleteId) {
+                            tbody.deleteRow(i);
+                            break;
+                        }
+                    }
+
+                    // Сброс формы и кнопки
+                    document.getElementById('deleteUserForm').reset();
+                    checkDeleteForm();
+                } else {
+                    alert('Ошибка: ' + result.message);
+                }
+            } else {
+                const error = await response.json();
+                alert('Ошибка: ' + error.message);
+            }
+        } catch (err) {
+            console.error('Ошибка отправки:', err);
+            alert('Произошла ошибка при удалении записи.');
+        }
+    }
+
+</script>
 </body>
 </html>

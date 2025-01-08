@@ -1,5 +1,6 @@
 using System.Data.SqlClient;
 using System.Net;
+using System.Runtime.InteropServices.JavaScript;
 using System.Text.Json;
 using HttpServerLibrary.Attributes;
 using HttpServerLibrary.Configurations;
@@ -106,65 +107,57 @@ public class AdminEndpoint : EndpointBase
         }
     }
     
-    // [Post("admin/users/add")]
-    // public IHttpResponseResult AddUser(HttpListenerRequest request)
-    // {
-    //     try
-    //     {
-    //         using (var reader = new StreamReader(request.InputStream, request.ContentEncoding))
-    //         {
-    //             var body = reader.ReadToEnd();
-    //             var newUser = JsonSerializer.Deserialize<User>(body);
-    //
-    //             using (var dbConnection = new SqlConnection(AppConfig.GetInstance().ConnectionString))
-    //             {
-    //                 var context = new OrmContext<User>(dbConnection);
-    //                 context.Create(newUser, "Users");
-    //             }
-    //         }
-    //
-    //         return Json(new { message = "Запись успешно добавлена!" });
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //         return Json(new { message = "Ошибка добавления записи: " + ex.Message });
-    //     }
-    // }
-    
     [Post("admin/users/add")]
-    public IHttpResponseResult AddUser(HttpListenerRequest request)
+    public IHttpResponseResult AddUser(Object user)
     {
         try
         {
-            using (var reader = new StreamReader(request.InputStream, request.ContentEncoding))
+            var jsonString = System.Text.Json.JsonSerializer.Serialize(user);
+       
+            // Десериализуем JSON-строку в объект типа User
+            var newUser = System.Text.Json.JsonSerializer.Deserialize<User>(jsonString);
+
+            using (var dbConnection = new SqlConnection(AppConfig.GetInstance().ConnectionString))
             {
-                var body = reader.ReadToEnd();
+                var context = new OrmContext<User>(dbConnection);
 
-                if (string.IsNullOrEmpty(body))
-                {
-                    return Json(new { message = "Тело запроса не может быть пустым" });
-                }
+                // Вставка нового пользователя и получение Id
+                var createdUser = context.Create(newUser, "Users");
 
-                var newUser = JsonSerializer.Deserialize<User>(body);
-
-                if (newUser == null)
-                {
-                    return Json(new { message = "Ошибка десериализации данных пользователя" });
-                }
-
-                using (var dbConnection = new SqlConnection(AppConfig.GetInstance().ConnectionString))
-                {
-                    var context = new OrmContext<User>(dbConnection);
-                    context.Create(newUser, "Users");
-                }
+                // Если метод Create возвращает объект User с заполненным Id, возвращаем Id
+                return Json(new { success = true, id = createdUser.Id });
             }
-
-            return Json(new { message = "Запись успешно добавлена!" });
         }
         catch (Exception ex)
         {
-            return Json(new { message = "Ошибка добавления записи: " + ex.Message });
+            // Возвращаем false и сообщение об ошибке
+            return Json(new { success = false, message = ex.Message });
         }
     }
+    
+    [Post("admin/users/delete")]
+    public IHttpResponseResult DeleteUser(Object obj)
+    {
+        try
+        {
+            var jsonString = System.Text.Json.JsonSerializer.Serialize(obj);
+            
+            var newUser = System.Text.Json.JsonSerializer.Deserialize<DeleteUserRequestModel>(jsonString);
 
+            using (var dbConnection = new SqlConnection(AppConfig.GetInstance().ConnectionString))
+            {
+                var context = new OrmContext<User>(dbConnection);
+
+      
+                context.Delete(int.Parse(newUser.Id), "Users");
+
+                
+                return Json(new { success = true });
+            }
+        }
+        catch (Exception ex)
+        {
+            return Json(new { success = false, message = ex.Message });
+        }
+    }
 }
