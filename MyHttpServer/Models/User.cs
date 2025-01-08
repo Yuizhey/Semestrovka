@@ -4,7 +4,8 @@ namespace Server.Models;
 
 public class User
 {
-    [JsonIgnore]
+    // [JsonIgnore]
+    [JsonPropertyName("id")]
     public int Id { get; set; }
 
     [JsonPropertyName("login")]

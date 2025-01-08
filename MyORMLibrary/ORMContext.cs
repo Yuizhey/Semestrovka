@@ -134,21 +134,36 @@ public class OrmContext<T> where T : class, new()
     public void Update(int id, T entity, string tableName)
     {
         var properties = typeof(T).GetProperties();
-        var setClause = string.Join(", ", properties.Select(p => $"{p.Name} = @{p.Name}"));
+    
+        // Исключаем свойство "Id" из списка параметров
+        var setClause = string.Join(", ", properties
+            .Where(p => p.Name != "Id")  // Искидаем свойство Id
+            .Select(p => $"{p.Name} = @{p.Name}"));
+
         string sql = $"UPDATE {tableName} SET {setClause} WHERE Id = @Id";
+
         try
         {
             using (var command = _dbConnection.CreateCommand())
             {
                 command.CommandText = sql;
+
+                // Добавляем параметры для всех свойств, кроме "Id"
                 foreach (var property in properties)
                 {
-                    var parameter = command.CreateParameter();
-                    parameter.ParameterName = $"@{property.Name}";
-                    parameter.Value = property.GetValue(entity) ?? DBNull.Value;
-                    command.Parameters.Add(parameter);
+                    if (property.Name != "Id")  // Пропускаем "Id"
+                    {
+                        var parameter = command.CreateParameter();
+                        parameter.ParameterName = $"@{property.Name}";
+                        var value = property.GetValue(entity);
+
+                        // Если значение null, передаем DBNull
+                        parameter.Value = value ?? DBNull.Value;
+                        command.Parameters.Add(parameter);
+                    }
                 }
 
+                // Добавляем параметр для ID
                 var idParameter = command.CreateParameter();
                 idParameter.ParameterName = "@Id";
                 idParameter.Value = id;
@@ -161,11 +176,15 @@ public class OrmContext<T> where T : class, new()
         catch (Exception ex)
         {
             // Логирование ошибки
-            Console.WriteLine($"Error: {ex.Message}");
+            Console.WriteLine($"Error while updating the record: {ex.Message}");
         }
         finally
         {
-            _dbConnection.Close();
+            // Закрываем соединение
+            if (_dbConnection.State == System.Data.ConnectionState.Open)
+            {
+                _dbConnection.Close();
+            }
         }
     }
 

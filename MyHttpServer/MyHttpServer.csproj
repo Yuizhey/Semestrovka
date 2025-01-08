@@ -88,6 +88,9 @@
       <None Update="public\AdminMovieStatisticTable.html">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="public\scripts\adminUsersTable.js">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
