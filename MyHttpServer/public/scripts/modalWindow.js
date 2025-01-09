@@ -32,3 +32,14 @@ window.onclick = function (event) {
         cabinetModal.style.display = "none";
     }
 };
+
+function deleteCookieConditionally(name) {
+    // Удаляем куку
+    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+    // Проверяем, действительно ли кука была удалена
+    if (document.cookie.indexOf(name + "=") === -1) {
+        // Кука успешно удалена, обновляем страницу
+        location.reload();
+    }
+}

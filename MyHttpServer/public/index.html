@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Лордфильм</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mobileStyle.css">
 </head>
 <body>
     <div class="first-image" onclick="location.href='index.html'">
@@ -54,7 +55,7 @@
 <!--                    <input type="checkbox" id="rememberMe">-->
 <!--                    <label for="rememberMe">Запомнить</label>-->
 <!--                </div>-->
-                <button type="">ВОЙТИ НА САЙТ</button>
+                <button type="submit">ВОЙТИ НА САЙТ</button>
                 <div class="links">
                     <a href="#">Регистрация</a>
                     <a href="#">Восстановить пароль</a>
@@ -67,13 +68,13 @@
     <div id="cabinetModal" class="modal">
         <div class="modal-content">
             <span class="close" id="closeCabinetModal">&times;</span>
-            <h2 id="usernameDisplay">{Login}</h2>
+            <h2 id="usernameDisplay">{login}</h2>
             <img src="https://via.placeholder.com/50" alt="User Icon">
             <div class="cabinet-options">
                 <button>Мой профиль</button>
                 <button>Мои просмотры</button>
                 <button>Мои закладки (0)</button>
-                <button id="logoutButton">Выйти</button>
+                <button id="logoutButton" onclick="deleteCookieConditionally('session-token')">Выйти</button>
             </div>
         </div>
     </div>

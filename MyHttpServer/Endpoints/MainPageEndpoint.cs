@@ -70,7 +70,8 @@ public class MainPageEndpoint : EndpointBase
         {
             return Html(engine.Render(renderedHtml, "{data}", TemplateStorage.UnauthorizedPlaceholder));
         }
-    
+
+        renderedHtml = engine.Render(renderedHtml, "{login}", SessionStorage.GetUserLogin(Context.Request.Cookies.FirstOrDefault(c => c.Name=="session-token").Value));
         return Html(engine.Render(renderedHtml, "{data}", TemplateStorage.AuthorizedPlaceholder));
     }
 

@@ -91,6 +91,9 @@
       <None Update="public\scripts\adminUsersTable.js">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="public\css\mobileStyle.css">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

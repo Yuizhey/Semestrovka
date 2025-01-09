@@ -1,10 +1,12 @@
 using System.Data.SqlClient;
+using System.Net;
 using HttpServerLibrary.Attributes;
 using HttpServerLibrary.Configurations;
 using HttpServerLibrary.Core;
 using HttpServerLibrary.Core.HttpResponse;
 using MyHttpServer.Helpers;
 using MyORMLibrary;
+using MyServer.services;
 using Server.Models;
 
 namespace MyHttpServer.Endpoints;
@@ -57,7 +59,7 @@ public class CardPageEndpoint : EndpointBase
         {
             return Html(engine.Render(renderedHtml, "{data}", "ВОЙТИ"));
         }
-    
+        renderedHtml = engine.Render(renderedHtml, "{login}", SessionStorage.GetUserLogin(Context.Request.Cookies.FirstOrDefault(c => c.Name=="session-token").Value));
         return Html(engine.Render(renderedHtml, "{data}", "КАБИНЕТ"));
     }
 }
