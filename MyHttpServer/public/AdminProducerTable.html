@@ -9,22 +9,77 @@
 <body>
 <button class="back-button" onclick="location.href='/admin'">Назад</button>
 
-<div class="container">
-    <h1>Таблица: Producer</h1>
-    <table>
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>DirectedFilmsCount</th>
-            <th>BirthYear</th>
-            <th>BirthCountry</th>
-        </tr>
-        </thead>
-        <tbody>
-            {items}
-        </tbody>
-    </table>
-</div>
+<div class="flex-container">
+    <div class="container">
+        <h1>Таблица: Producer</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>DirectedFilmsCount</th>
+                <th>BirthYear</th>
+                <th>BirthCountry</th>
+            </tr>
+            </thead>
+            <tbody id="producersTableBody">
+                {items}
+            </tbody>
+        </table>
+    </div>
+    <div class="form-section">
+        <div class="form-container">
+            <h2>Добавить запись</h2>
+            <form id="addProducerForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" onchange="checkForm()" required>
+    
+                <label for="directedFilmsCount">Directed Films Count:</label>
+                <input type="number" id="directedFilmsCount" name="directedfilmscount" onchange="checkForm()" required>
+    
+                <label for="birthYear">Birth Year:</label>
+                <input type="number" id="birthYear" name="birthyear" onchange="checkForm()" required>
+    
+                <label for="birthCountry">Birth Country:</label>
+                <input type="text" id="birthCountry" name="birthcountry" onchange="checkForm()" required>
+    
+                <button type="submit" id="submitButton" disabled>Добавить</button>
+            </form>
+        </div>
+    
+        <div class="form-container">
+            <h2>Удалить запись</h2>
+            <form id="deleteProducerForm">
+                <label for="deleteId">ID:</label>
+                <input type="number" id="deleteId" name="id" onchange="checkDeleteProducerForm()" required>
+    
+                <button type="submit" id="deleteButton" disabled>Удалить</button>
+            </form>
+        </div>
+    
+        <div class="form-container">
+            <h2>Обновить запись</h2>
+            <form id="updateProducerForm">
+                <label for="updateId">ID:</label>
+                <input type="number" id="updateId" name="id" onchange="checkUpdateProducerForm()" required>
+    
+                <label for="updateName">Name:</label>
+                <input type="text" id="updateName" name="name" onchange="checkUpdateProducerForm()" required>
+    
+                <label for="updateDirectedFilmsCount">Directed Films Count:</label>
+                <input type="number" id="updateDirectedFilmsCount" name="directedfilmscount" onchange="checkUpdateProducerForm()" required>
+    
+                <label for="updateBirthYear">Birth Year:</label>
+                <input type="number" id="updateBirthYear" name="birthyear" onchange="checkUpdateProducerForm()" required>
+    
+                <label for="updateBirthCountry">Birth Country:</label>
+                <input type="text" id="updateBirthCountry" name="birthcountry" onchange="checkUpdateProducerForm()" required>
+    
+                <button type="submit" id="updateButton" disabled>Обновить</button>
+            </form>
+        </div>
+    </div>
+</div>    
+<script src="../scripts/adminProducerTable.js"></script>
 </body>
 </html>

@@ -1,21 +1,24 @@
-document.getElementById('userForm').addEventListener('submit', submitForm);
+document.getElementById('addProducerForm').addEventListener('submit', submitProducerForm);
 function checkForm() {
-    const login = document.getElementById('login').value.trim();
-    const password = document.getElementById('password').value.trim();
-    const email = document.getElementById('email').value.trim();
+    const name = document.getElementById('name').value.trim();
+    const directedFilmsCount = document.getElementById('directedFilmsCount').value.trim();
+    const birthYear = document.getElementById('birthYear').value.trim();
+    const birthCountry = document.getElementById('birthCountry').value.trim();
 
     const submitButton = document.getElementById('submitButton');
-    submitButton.disabled = !(login && password && email);
+    submitButton.disabled = !(name && directedFilmsCount && birthYear && birthCountry);
 }
-async function submitForm(event) {
+async function submitProducerForm(event) {
     event.preventDefault();
-    const form = document.getElementById('userForm');
+    const form = document.getElementById('addProducerForm');
     const formData = new FormData(form);
 
     const data = Object.fromEntries(formData.entries());
+    data.directedfilmscount = +data.directedfilmscount;
+    data.birthyear = +data.birthyear;
 
     try {
-        const response = await fetch('/admin/users/add', {
+        const response = await fetch('/admin/producer/add', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
@@ -23,13 +26,14 @@ async function submitForm(event) {
         if (response.ok) {
             const result = await response.json();
 
-            const tbody = document.getElementById('usersTableBody');
+            const tbody = document.getElementById('producersTableBody');
             const newRow = `
                         <tr>
                             <td>${result.id}</td>
-                            <td>${data.login}</td>
-                            <td>${data.password}</td>
-                            <td>${data.email}</td>
+                            <td>${data.name}</td>
+                            <td>${data.directedfilmscount}</td>
+                            <td>${data.birthyear}</td>
+                            <td>${data.birthcountry}</td>
                         </tr>`;
             tbody.innerHTML += newRow;
 
@@ -44,26 +48,25 @@ async function submitForm(event) {
     }
 }
 
-document.getElementById('deleteUserForm').addEventListener('submit', deleteUser);
-function checkDeleteForm() {
+document.getElementById('deleteProducerForm').addEventListener('submit', deleteProducer);
+function checkDeleteProducerForm() {
     const deleteId = document.getElementById('deleteId').value.trim();
     const deleteButton = document.getElementById('deleteButton');
     deleteButton.disabled = !deleteId;
 }
-async function deleteUser(event) {
+async function deleteProducer(event) {
     event.preventDefault();
 
     let deleteId = document.getElementById('deleteId').value.trim();
     deleteId = +deleteId;
 
     try {
-        // Формируем JSON-объект для отправки
         const data = { id: deleteId };
 
-        const response = await fetch('/admin/users/delete', {
+        const response = await fetch('/admin/producer/delete', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data) // Преобразуем объект в строку JSON
+            body: JSON.stringify(data)
         });
 
         if (response.ok) {
@@ -71,7 +74,7 @@ async function deleteUser(event) {
 
             if (result.success) {
 
-                const tbody = document.getElementById('usersTableBody');
+                const tbody = document.getElementById('producersTableBody');
                 const rows = tbody.getElementsByTagName('tr');
 
                 // Ищем строку с нужным ID, проверяя только первую ячейку
@@ -86,8 +89,8 @@ async function deleteUser(event) {
                 }
 
                 // Сброс формы и кнопки
-                document.getElementById('deleteUserForm').reset();
-                checkDeleteForm();
+                document.getElementById('deleteProducerForm').reset();
+                checkDeleteProducerForm();
             } else {
                 alert('Ошибка: ' + result.message);
             }
@@ -102,27 +105,30 @@ async function deleteUser(event) {
 }
 
 
-document.getElementById('updateUserForm').addEventListener('submit', updateUser);
-function checkUpdateForm() {
+document.getElementById('updateProducerForm').addEventListener('submit', updateProducer);
+function checkUpdateProducerForm() {
     const updateId = document.getElementById('updateId').value.trim();
-    const updateLogin = document.getElementById('updateLogin').value.trim();
-    const updatePassword = document.getElementById('updatePassword').value.trim();
-    const updateEmail = document.getElementById('updateEmail').value.trim();
+    const updateName = document.getElementById('updateName').value.trim();
+    const updateDirectedFilmsCount = document.getElementById('updateDirectedFilmsCount').value.trim();
+    const updateBirthYear = document.getElementById('updateBirthYear').value.trim();
+    const updateBirthCountry = document.getElementById('updateBirthCountry').value.trim();
 
     const updateButton = document.getElementById('updateButton');
-    updateButton.disabled = !(updateId && updateLogin && updatePassword && updateEmail);
+    updateButton.disabled = !(updateId && updateName && updateDirectedFilmsCount && updateBirthYear && updateBirthCountry);
 }
-async function updateUser(event) {
+async function updateProducer(event) {
     event.preventDefault();
 
-    const form = document.getElementById('updateUserForm');
+    const form = document.getElementById('updateProducerForm');
     const formData = new FormData(form);
 
     const data = Object.fromEntries(formData.entries());
     data.id = Number(data.id);
+    data.directedfilmscount = Number(data.directedfilmscount);
+    data.birthyear = Number(data.birthyear);
 
     try {
-        const response = await fetch('/admin/users/update', {
+        const response = await fetch('/admin/producer/update', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
@@ -132,22 +138,22 @@ async function updateUser(event) {
             const result = await response.json();
 
             if (result.success) {
-                const tbody = document.getElementById('usersTableBody');
+                const tbody = document.getElementById('producersTableBody');
                 const rows = tbody.getElementsByTagName('tr');
 
-                // Обновляем строку с указанным ID
                 for (let i = 0; i < rows.length; i++) {
                     const cells = rows[i].getElementsByTagName('td');
                     if (cells.length > 0 && cells[0].textContent === String(data.id)) {
-                        cells[1].textContent = result.login;
-                        cells[2].textContent = result.password;
-                        cells[3].textContent = result.email;
+                        cells[1].textContent = result.name;
+                        cells[2].textContent = result.directedFilmsCount;
+                        cells[3].textContent = result.birthYear;
+                        cells[4].textContent = result.birthCountry;
                         break;
                     }
                 }
 
                 form.reset();
-                checkUpdateForm();
+                checkUpdateProducerForm();
             } else {
                 alert('Ошибка: ' + result.message);
             }

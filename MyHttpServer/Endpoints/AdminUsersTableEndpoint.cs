@@ -70,7 +70,7 @@ public class AdminUsersTableEndpoint : EndpointBase
                 var context = new OrmContext<User>(dbConnection);
 
       
-                context.Delete(int.Parse(newUser.Id), "Users");
+                context.Delete(newUser.Id, "Users");
 
                 
                 return Json(new { success = true });

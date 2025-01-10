@@ -22,22 +22,6 @@ public class AdminEndpoint : EndpointBase
         return Html(fileText);
     }
     
-    [Get("admin/producer")]
-    public IHttpResponseResult GetProducerTable()
-    {
-
-        var engine = new HtmlTemplateEngine();
-        string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "public", "AdminProducerTable.html");
-        var fileText = File.ReadAllText(filePath);
-        // var template = TemplateStorage.MovieDetailsTemplate;
-        using (var dbConnection = new SqlConnection(AppConfig.GetInstance().ConnectionString))
-        {
-            var context = new OrmContext<Producer>(dbConnection);
-            var users = context.GetAll("Producer");
-            var template = TemplateStorage.AdminProducerTable;
-            return Html(engine.Render(fileText,users,template));
-        }
-    }
     
     [Get("admin/movies")]
     public IHttpResponseResult GetMoviesTable()
