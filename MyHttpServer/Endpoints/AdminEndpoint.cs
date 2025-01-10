@@ -17,8 +17,13 @@ public class AdminEndpoint : EndpointBase
     [Get("admin")]
     public IHttpResponseResult GetAdminPage()
     {
-        string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "public", "admin.html");
-        var fileText = File.ReadAllText(filePath);
-        return Html(fileText);
+        if (AuthorizedHelper.IsAuthorized(Context))
+        {
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "public", "admin.html");
+            var fileText = File.ReadAllText(filePath);
+            return Html(fileText);
+        }
+
+        return Redirect("/films");
     }
 }

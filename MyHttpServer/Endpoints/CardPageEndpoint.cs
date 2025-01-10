@@ -62,4 +62,41 @@ public class CardPageEndpoint : EndpointBase
         renderedHtml = engine.Render(renderedHtml, "{login}", AuthorizedHelper.GetUserLogin(Context.Request.Cookies.FirstOrDefault(c => c.Name=="session-token").Value));
         return Html(engine.Render(renderedHtml, "{data}", "КАБИНЕТ"));
     }
+
+    [Post("card/reaction")]
+    public IHttpResponseResult PutReaction(Object obj)
+    {
+        try
+        {
+            // Проверяем авторизацию пользователя
+            if (!AuthorizedHelper.IsAuthorized(Context))
+            {
+                return Json(new { success = false, message = "Чтобы ставить реакции вы должны быть авторизованы." });
+            }
+
+            var jsonString = System.Text.Json.JsonSerializer.Serialize(obj);
+   
+            // Десериализуем JSON-строку в объект типа CardReaction
+            var newReaction = System.Text.Json.JsonSerializer.Deserialize<CardReaction>(jsonString);
+
+            using (var dbConnection = new SqlConnection(AppConfig.GetInstance().ConnectionString))
+            {
+                var context = new OrmContext<CardReaction>(dbConnection);
+
+                // Здесь вы могли бы выполнять проверку на существование реакции
+                // при необходимости
+
+                // Вставка нового (или обновление существующего) пользователя и получение Id
+                context.Update(newReaction.Id, newReaction, "MovieStatistic");
+
+                // Если метод Create возвращает объект CardReaction с заполненным Id, возвращаем Id
+                return Json(new { success = true, likescount = newReaction.Likes_Count, dislikescount = newReaction.Dislikes_Count });
+            }
+        }
+        catch (Exception ex)
+        {
+            // Возвращаем false и сообщение об ошибке
+            return Json(new { success = false, message = ex.Message });
+        }
+    }
 }

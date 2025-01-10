@@ -217,7 +217,7 @@ input:focus {
 }
 
 .modal-content .links a {
-    color: #4CAF50;
+    color: #0056b3;
     text-decoration: none;
 }
 
@@ -253,22 +253,23 @@ input:focus {
     cursor: pointer;
 }
 
+.cabinet-options{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
 .cabinet-options button {
     display: block;
     width: 100%;
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    color: gray;
+    border: 1px solid gray;
     cursor: pointer;
     font-size: 16px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.cabinet-options button:hover {
-    background-color: #0056b3;
-}
 
 
 

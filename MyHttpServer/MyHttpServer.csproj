@@ -106,6 +106,9 @@
       <None Update="public\scripts\adminMovieDetailsTable.js">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="public\scripts\reactions.js">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="css/card.css">
 </head>
 <body>
-    <div class="first-image" onclick="location.href='index.html'">
+    <div class="first-image" onclick="location.href='/films'">
         <img src="images/header-image.png" alt="LordFilm" class="first-first-logo">
     </div>
     <header class="header">
         <div class="header-first">
             <img src="images/header-logo.png" alt="LordFilm" class="header-first-logo">
             <ul class="header-first-list">
-                <li class="header-first-list-item">ФИЛЬМЫ</li>
+                <li class="header-first-list-item" onclick="location.href='/films'">ФИЛЬМЫ</li>
                 <li class="header-first-list-item">СЕРИАЛЫ</li>
                 <li class="header-first-list-item">МУЛЬТФИЛЬМЫ</li>
             </ul>
@@ -30,7 +30,7 @@
         </div>
         <div class="header-second">
             <ul class="header-second-list">
-                <li class="header-second-list-item"><a href="" class="header-second-list-item-link" id="header-link-1">Фильмы 2024</a></li>
+                <li class="header-second-list-item"><a href="/films" class="header-second-list-item-link" id="header-link-1">Фильмы 2024</a></li>
                 <li class="header-second-list-item"><a href="" class="header-second-list-item-link" id="header-link-2">Недельный ТОП-50</a></li>
                 <li class="header-second-list-item"><a href="" class="header-second-list-item-link" id="header-link-3">Новости</a></li>
                 <li class="header-second-list-item"><a href="" class="header-second-list-item-link" id="header-link-4">Netflix</a></li>
@@ -56,8 +56,8 @@
 <!--                </div>-->
                 <button type="submit">ВОЙТИ НА САЙТ</button>
                 <div class="links">
-                    <a href="#">Регистрация</a>
-                    <a href="#">Восстановить пароль</a>
+                    <a href="">Регистрация</a>
+                    <a href="">Восстановить пароль</a>
                 </div>
             </form>
         </div>
@@ -68,11 +68,10 @@
         <div class="modal-content">
             <span class="close" id="closeCabinetModal">&times;</span>
             <h2 id="usernameDisplay">{login}</h2>
-            <img src="https://via.placeholder.com/50" alt="User Icon">
             <div class="cabinet-options">
                 <button>Мой профиль</button>
                 <button>Мои просмотры</button>
-                <button>Мои закладки (0)</button>
+                <button>Мои закладки</button>
                 <button id="logoutButton" onclick="deleteCookieConditionally('session-token')">Выйти</button>
             </div>
         </div>
@@ -93,13 +92,13 @@
                     <img src='{imagesource}' alt='' class='main-photo-image'>
                 </div>
                 <div class='main-filmAbout-image-marks'>
-                    <div class='main-marks-positive'>
-                        <img src='images/like.png' alt='' class='main-marks-positive-image'>
-                        <p class='main-marks-positive-count'>{likes_count}</p>
+                    <div class="main-marks-positive" onclick="handleVote('like')">
+                        <img src="images/like.png" alt="" class="main-marks-positive-image">
+                        <p id="likes-count" class="main-marks-positive-count">{likes_count}</p>
                     </div>
-                    <div class='main-marks-negative'>
-                        <p class='main-marks-negative-count'>{dislikes_count}</p>
-                        <img src='images/dislike.png' alt='' class='main-marks-negative-image'>
+                    <div class="main-marks-negative" onclick="handleVote('dislike')">
+                        <p id="dislikes-count" class="main-marks-negative-count">{dislikes_count}</p>
+                        <img src="images/dislike.png" alt="" class="main-marks-negative-image">
                     </div>
                 </div>
             </div>
@@ -245,5 +244,6 @@
     </footer>
 
     <script src="scripts/modalWindow.js"></script>
+    <script src="scripts/reactions.js"></script>
 </body>
 </html>
