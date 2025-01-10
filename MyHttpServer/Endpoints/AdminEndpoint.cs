@@ -23,23 +23,6 @@ public class AdminEndpoint : EndpointBase
     }
     
     
-    [Get("admin/movies")]
-    public IHttpResponseResult GetMoviesTable()
-    {
-
-        var engine = new HtmlTemplateEngine();
-        string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "public", "AdminMoviesTable.html");
-        var fileText = File.ReadAllText(filePath);
-        // var template = TemplateStorage.MovieDetailsTemplate;
-        using (var dbConnection = new SqlConnection(AppConfig.GetInstance().ConnectionString))
-        {
-            var context = new OrmContext<Movie>(dbConnection);
-            var users = context.GetAll("Movies");
-            var template = TemplateStorage.AdminMoviesTable;
-            return Html(engine.Render(fileText,users,template));
-        }
-    }
-    
     [Get("admin/movie-details")]
     public IHttpResponseResult GetMovieDetailsTable()
     {

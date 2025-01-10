@@ -9,22 +9,84 @@
 <body>
 <button class="back-button" onclick="location.href='/admin'">Назад</button>
 
-<div class="container">
-    <h1>Таблица: Movies</h1>
-    <table>
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>RuTitle</th>
-            <th>ReleaseYear</th>
-            <th>ImageSource</th>
-            <th>Status</th>
-        </tr>
-        </thead>
-        <tbody>
+<div class="">
+    <!-- Таблица -->
+    <div class="container">
+        <h1>Таблица: Movies</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>RuTitle</th>
+                <th>ReleaseYear</th>
+                <th>ImageSource</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody id="moviesTableBody">
             {items}
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Формы -->
+    <div class="form-section">
+        <!-- Добавить запись -->
+        <div class="form-container">
+            <h2>Добавить запись</h2>
+            <form id="addMovieForm">
+                <label for="ruTitle">RuTitle:</label>
+                <input type="text" id="ruTitle" name="rutitle" onchange="checkAddForm()" required>
+
+                <label for="releaseYear">Release Year:</label>
+                <input type="number" id="releaseYear" name="releaseyear" onchange="checkAddForm()" required>
+
+                <label for="imageSource">Image Source:</label>
+                <input type="text" id="imageSource" name="imagesource" onchange="checkAddForm()" required>
+
+                <label for="status">Status:</label>
+                <input type="text" id="status" name="status" onchange="checkAddForm()" required>
+
+                <button type="submit" id="addSubmitButton" disabled>Добавить</button>
+            </form>
+        </div>
+
+        <!-- Удалить запись -->
+        <div class="form-container">
+            <h2>Удалить запись</h2>
+            <form id="deleteMovieForm">
+                <label for="deleteId">ID:</label>
+                <input type="number" id="deleteId" name="id" onchange="checkDeleteMovieForm()" required>
+
+                <button type="submit" id="deleteButton" disabled>Удалить</button>
+            </form>
+        </div>
+
+        <!-- Обновить запись -->
+        <div class="form-container">
+            <h2>Обновить запись</h2>
+            <form id="updateMovieForm">
+                <label for="updateId">ID:</label>
+                <input type="number" id="updateId" name="id" onchange="checkUpdateMovieForm()" required>
+
+                <label for="updateRuTitle">RuTitle:</label>
+                <input type="text" id="updateRuTitle" name="rutitle" onchange="checkUpdateMovieForm()" required>
+
+                <label for="updateReleaseYear">Release Year:</label>
+                <input type="number" id="updateReleaseYear" name="releaseyear" onchange="checkUpdateMovieForm()" required>
+
+                <label for="updateImageSource">Image Source:</label>
+                <input type="text" id="updateImageSource" name="imagesource" onchange="checkUpdateMovieForm()" required>
+
+                <label for="updateStatus">Status:</label>
+                <input type="text" id="updateStatus" name="status" onchange="checkUpdateMovieForm()" required>
+
+                <button type="submit" id="updateButton" disabled>Обновить</button>
+            </form>
+        </div>
+    </div>
 </div>
+
+<script src="../scripts/adminMoviesTable.js"></script>
 </body>
 </html>
