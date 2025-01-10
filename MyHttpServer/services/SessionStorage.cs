@@ -29,14 +29,5 @@ public static class SessionStorage
         return _sessions.TryGetValue(token, out var userId) ? userId : null;
     }
 
-    public static string GetUserLogin(string token)
-    {
-        var userId = GetUserId(token);
-        using (var dbConnection = new SqlConnection(AppConfig.GetInstance().ConnectionString))
-        {
-            var context = new OrmContext<User>(dbConnection);
-            var user = context.ReadById(int.Parse(userId),"Users");
-            return user.Login;
-        }
-    }
+    
 }

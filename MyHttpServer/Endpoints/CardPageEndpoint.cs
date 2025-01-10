@@ -55,11 +55,11 @@ public class CardPageEndpoint : EndpointBase
             };
             renderedHtml = engine.Render(fileText, obj);
         }
-        if (!AuthorizedCheck.IsAuthorized(Context))
+        if (!AuthorizedHelper.IsAuthorized(Context))
         {
             return Html(engine.Render(renderedHtml, "{data}", "ВОЙТИ"));
         }
-        renderedHtml = engine.Render(renderedHtml, "{login}", SessionStorage.GetUserLogin(Context.Request.Cookies.FirstOrDefault(c => c.Name=="session-token").Value));
+        renderedHtml = engine.Render(renderedHtml, "{login}", AuthorizedHelper.GetUserLogin(Context.Request.Cookies.FirstOrDefault(c => c.Name=="session-token").Value));
         return Html(engine.Render(renderedHtml, "{data}", "КАБИНЕТ"));
     }
 }

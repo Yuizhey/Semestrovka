@@ -66,20 +66,20 @@ public class MainPageEndpoint : EndpointBase
             // Преобразуем данные в шаблон
             renderedHtml = engine.Render(fileText, mainModel, itemTemplate);
         }
-        if (!AuthorizedCheck.IsAuthorized(Context))
+        if (!AuthorizedHelper.IsAuthorized(Context))
         {
             return Html(engine.Render(renderedHtml, "{data}", TemplateStorage.UnauthorizedPlaceholder));
         }
 
-        renderedHtml = engine.Render(renderedHtml, "{login}", SessionStorage.GetUserLogin(Context.Request.Cookies.FirstOrDefault(c => c.Name=="session-token").Value));
-        return Html(engine.Render(renderedHtml, "{data}", TemplateStorage.AuthorizedPlaceholder));
+        renderedHtml = engine.Render(renderedHtml, "{login}", AuthorizedHelper.GetUserLogin(Context.Request.Cookies.FirstOrDefault(c => c.Name=="session-token").Value));
+        return Html(engine.Render(renderedHtml, "{data}", "КАБИНЕТ"));
     }
 
 
     [Post("films")]
     public IHttpResponseResult Login(string login, string password)
     {
-        if (AuthorizedCheck.IsAuthorized(Context))
+        if (AuthorizedHelper.IsAuthorized(Context))
         {
             return Redirect("/films");
         }
