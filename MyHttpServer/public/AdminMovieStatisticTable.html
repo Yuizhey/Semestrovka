@@ -3,29 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Movie Details Management</title>
     <link rel="stylesheet" href="../css/adminTable.css">
 </head>
 <body>
 <button class="back-button" onclick="location.href='/admin'">Назад</button>
 
-<div class="container">
-    <h1>Таблица: MovieDetails</h1>
-    <table>
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>KP_Rating</th>
-            <th>IMDB_Rating</th>
-            <th>Likes_Count</th>
-            <th>Dislikes_Count</th>
-            <th>Movie_Id</th>
-        </tr>
-        </thead>
-        <tbody>
+<div class="flex-container">
+    <!-- Таблица -->
+    <div class="container">
+        <h1>Таблица: MovieDetails</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>KP_Rating</th>
+                <th>IMDB_Rating</th>
+                <th>Likes_Count</th>
+                <th>Dislikes_Count</th>
+                <th>Movie_Id</th>
+            </tr>
+            </thead>
+            <tbody id="movieDetailsTableBody">
             {items}
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Формы -->
+    <div class="form-section">
+        <!-- Форма добавления записи -->
+        <div class="form-container">
+            <h2>Добавить запись</h2>
+            <form id="addMovieStatisticForm">
+                <label for="kpRating">KP_Rating:</label>
+                <input type="number" step="0.1" id="kpRating" name="kp_rating" onchange="checkAddForm()" required>
+
+                <label for="imdbRating">IMDB_Rating:</label>
+                <input type="number" step="0.1" id="imdbRating" name="imdb_rating" onchange="checkAddForm()" required>
+
+                <label for="likesCount">Likes_Count:</label>
+                <input type="number" id="likesCount" name="likes_count" onchange="checkAddForm()" required>
+
+                <label for="dislikesCount">Dislikes_Count:</label>
+                <input type="number" id="dislikesCount" name="dislikes_count" onchange="checkAddForm()" required>
+
+                <label for="movieId">Movie_Id:</label>
+                <input type="number" id="movieId" name="movie_id" onchange="checkAddForm()" required>
+
+                <button type="submit" id="addSubmitButton" disabled>Добавить</button>
+            </form>
+        </div>
+
+        <!-- Форма удаления записи -->
+        <div class="form-container">
+            <h2>Удалить запись</h2>
+            <form id="deleteMovieStatisticForm">
+                <label for="deleteId">ID:</label>
+                <input type="number" id="deleteId" name="id" onchange="checkDeleteForm()" required>
+
+                <button type="submit" id="deleteButton" disabled>Удалить</button>
+            </form>
+        </div>
+
+        <!-- Форма обновления записи -->
+        <div class="form-container">
+            <h2>Обновить запись</h2>
+            <form id="updateMovieStatisticForm">
+                <label for="updateId">ID:</label>
+                <input type="number" id="updateId" name="id" onchange="checkUpdateForm()" required>
+
+                <label for="updateKpRating">KP_Rating:</label>
+                <input type="number" step="0.1" id="updateKpRating" name="kp_rating" onchange="checkUpdateForm()" required>
+
+                <label for="updateImdbRating">IMDB_Rating:</label>
+                <input type="number" step="0.1" id="updateImdbRating" name="imdb_rating" onchange="checkUpdateForm()" required>
+
+                <label for="updateLikesCount">Likes_Count:</label>
+                <input type="number" id="updateLikesCount" name="likes_count" onchange="checkUpdateForm()" required>
+
+                <label for="updateDislikesCount">Dislikes_Count:</label>
+                <input type="number" id="updateDislikesCount" name="dislikes_count" onchange="checkUpdateForm()" required>
+
+                <label for="updateMovieId">Movie_Id:</label>
+                <input type="number" id="updateMovieId" name="movie_id" onchange="checkUpdateForm()" required>
+
+                <button type="submit" id="updateButton" disabled>Обновить</button>
+            </form>
+        </div>
+    </div>
 </div>
+
+<script src="../scripts/adminMovieStatisticTable.js"></script>
 </body>
 </html>

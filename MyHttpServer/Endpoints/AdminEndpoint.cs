@@ -40,20 +40,5 @@ public class AdminEndpoint : EndpointBase
         }
     }
     
-    [Get("admin/movie-stats")]
-    public IHttpResponseResult GetMovieStatiscticTable()
-    {
-
-        var engine = new HtmlTemplateEngine();
-        string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "public", "AdminMovieStatisticTable.html");
-        var fileText = File.ReadAllText(filePath);
-        // var template = TemplateStorage.MovieDetailsTemplate;
-        using (var dbConnection = new SqlConnection(AppConfig.GetInstance().ConnectionString))
-        {
-            var context = new OrmContext<MovieStatistic>(dbConnection);
-            var users = context.GetAll("MovieStatistic");
-            var template = TemplateStorage.AdminMovieStatsTable;
-            return Html(engine.Render(fileText,users,template));
-        }
-    }
+    
 }
