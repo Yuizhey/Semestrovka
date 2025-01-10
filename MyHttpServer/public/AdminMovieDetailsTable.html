@@ -8,7 +8,7 @@
 </head>
 <body>
 <button class="back-button" onclick="location.href='/admin'">Назад</button>
-<div class="flex-container">
+<div class="">
     <!-- Таблица -->
     <div class="container">
         <h1>Таблица: MovieDetails</h1>
@@ -25,40 +25,87 @@
                 <th>VideoURL</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="movieDetailsTableBody">
             {items}
             </tbody>
         </table>
     </div>
 
-    <!-- Форма -->
-    <div class="form-container">
-        <h2>Добавить запись</h2>
-        <form id="addMovieDetailsForm" action="/admin/movieDetails/add" method="POST">
-            <label for="movieDescription">Movie Description:</label>
-            <input type="text" id="movieDescription" name="movieDescription" required>
+    <!-- Формы -->
+    <div class="form-section">
+        <!-- Форма добавления записи -->
+        <div class="form-container">
+            <h2>Добавить запись</h2>
+            <form id="addMovieDetailsForm">
+                <label for="movieDescription">Movie Description:</label>
+                <input type="text" id="movieDescription" name="moviedescription" onchange="checkAddForm()" required>
 
-            <label for="country">Country:</label>
-            <input type="text" id="country" name="country" required>
+                <label for="country">Country:</label>
+                <input type="text" id="country" name="country" onchange="checkAddForm()" required>
 
-            <label for="producerId">Producer ID:</label>
-            <input type="number" id="producerId" name="producerId" required>
+                <label for="producerId">Producer ID:</label>
+                <input type="number" id="producerId" name="producerid" onchange="checkAddForm()" required>
 
-            <label for="engTitle">English Title:</label>
-            <input type="text" id="engTitle" name="engTitle" required>
+                <label for="engTitle">English Title:</label>
+                <input type="text" id="engTitle" name="engtitle" onchange="checkAddForm()" required>
 
-            <label for="movieId">Movie ID:</label>
-            <input type="number" id="movieId" name="movieId" required>
+                <label for="movieId">Movie ID:</label>
+                <input type="number" id="movieId" name="movieid" onchange="checkAddForm()" required>
 
-            <label for="quality">Quality:</label>
-            <input type="text" id="quality" name="quality" required>
+                <label for="quality">Quality:</label>
+                <input type="text" id="quality" name="quality" onchange="checkAddForm()" required>
 
-            <label for="videoUrl">Video URL:</label>
-            <input type="text" id="videoUrl" name="videoUrl" required>
+                <label for="videoUrl">Video URL:</label>
+                <input type="text" id="videoUrl" name="videourl" onchange="checkAddForm()" required>
 
-            <button type="submit">Добавить</button>
-        </form>
+                <button type="submit" id="addSubmitButton" disabled>Добавить</button>
+            </form>
+        </div>
+
+        <!-- Форма удаления записи -->
+        <div class="form-container">
+            <h2>Удалить запись</h2>
+            <form id="deleteMovieDetailsForm">
+                <label for="deleteId">ID:</label>
+                <input type="number" id="deleteId" name="id" onchange="checkDeleteForm()" required>
+
+                <button type="submit" id="deleteButton" disabled>Удалить</button>
+            </form>
+        </div>
+
+        <!-- Форма обновления записи -->
+        <div class="form-container">
+            <h2>Обновить запись</h2>
+            <form id="updateMovieDetailsForm">
+                <label for="updateId">ID:</label>
+                <input type="number" id="updateId" name="id" onchange="checkUpdateForm()" required>
+
+                <label for="updateMovieDescription">Movie Description:</label>
+                <input type="text" id="updateMovieDescription" name="moviedescription" onchange="checkUpdateForm()" required>
+
+                <label for="updateCountry">Country:</label>
+                <input type="text" id="updateCountry" name="country" onchange="checkUpdateForm()" required>
+
+                <label for="updateProducerId">Producer ID:</label>
+                <input type="number" id="updateProducerId" name="producerid" onchange="checkUpdateForm()" required>
+
+                <label for="updateEngTitle">English Title:</label>
+                <input type="text" id="updateEngTitle" name="engtitle" onchange="checkUpdateForm()" required>
+
+                <label for="updateMovieId">Movie ID:</label>
+                <input type="number" id="updateMovieId" name="movieid" onchange="checkUpdateForm()" required>
+
+                <label for="updateQuality">Quality:</label>
+                <input type="text" id="updateQuality" name="quality" onchange="checkUpdateForm()" required>
+
+                <label for="updateVideoUrl">Video URL:</label>
+                <input type="text" id="updateVideoUrl" name="videourl" onchange="checkUpdateForm()" required>
+
+                <button type="submit" id="updateButton" disabled>Обновить</button>
+            </form>
+        </div>
     </div>
 </div>
+<script src="../scripts/adminMovieDetailsTable.js"></script>
 </body>
 </html>

@@ -103,6 +103,9 @@
       <None Update="public\scripts\adminMovieStatisticTable.js">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="public\scripts\adminMovieDetailsTable.js">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

@@ -21,24 +21,4 @@ public class AdminEndpoint : EndpointBase
         var fileText = File.ReadAllText(filePath);
         return Html(fileText);
     }
-    
-    
-    [Get("admin/movie-details")]
-    public IHttpResponseResult GetMovieDetailsTable()
-    {
-
-        var engine = new HtmlTemplateEngine();
-        string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "public", "AdminMovieDetailsTable.html");
-        var fileText = File.ReadAllText(filePath);
-        // var template = TemplateStorage.MovieDetailsTemplate;
-        using (var dbConnection = new SqlConnection(AppConfig.GetInstance().ConnectionString))
-        {
-            var context = new OrmContext<MovieDetails>(dbConnection);
-            var users = context.GetAll("MovieDetails");
-            var template = TemplateStorage.AdminMovieDetailsTable;
-            return Html(engine.Render(fileText,users,template));
-        }
-    }
-    
-    
 }
