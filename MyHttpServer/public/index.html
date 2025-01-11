@@ -6,6 +6,7 @@
     <title>Лордфильм</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/mobileStyle.css">
+    <link rel="preload" as="image" href="images/header-image.png">
 </head>
 <body>
     <div class="first-image" onclick="location.href='/films'">
@@ -51,10 +52,6 @@
             <form id="authForm" method="post" action="/films">
                 <input type="text" id="username" placeholder="Ваш логин" required name="login">
                 <input type="text" id="password" placeholder="Ваш пароль" required name="password">
-<!--                <div class="remember">-->
-<!--                    <input type="checkbox" id="rememberMe">-->
-<!--                    <label for="rememberMe">Запомнить</label>-->
-<!--                </div>-->
                 <button type="submit">ВОЙТИ НА САЙТ</button>
                 <div class="links">
                     <a href="">Регистрация</a>
@@ -120,5 +117,33 @@
     </footer>
 
     <script src="scripts/modalWindow.js"></script>
+    <script>
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('error') && params.get('error') === 'UnauthorizedAccess') {
+                alert('На админскую страницу могут попасть только авторизованные пользователи.');
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const burgerIcon = document.getElementById('burgerIcon');
+            const burgerMenu = document.getElementById('burgerMenu');
+
+            // При нажатии на иконку
+            burgerIcon.addEventListener('click', () => {
+                burgerMenu.classList.toggle('open');
+            });
+
+            // Закрытие меню при клике вне его области
+            document.addEventListener('click', (e) => {
+                if (!burgerMenu.contains(e.target) && !burgerIcon.contains(e.target)) {
+                    burgerMenu.classList.remove('open');
+                }
+            });
+        });
+
+
+
+    </script>
 </body>
 </html>

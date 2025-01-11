@@ -24,6 +24,6 @@ public class AdminEndpoint : EndpointBase
             return Html(fileText);
         }
 
-        return Redirect("/films");
+        return Redirect("/films?error=UnauthorizedAccess");
     }
 }

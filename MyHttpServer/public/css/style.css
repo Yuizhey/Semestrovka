@@ -143,6 +143,21 @@ input:focus {
     color: #444444;
 }
 
+.burger-menu-container,.burger-icon{
+    display: none;
+}
+
+/* Адаптивность */
+@media (max-width: 480px) {
+    .burger-icon {
+        display: flex;
+    }
+
+    .header-first-list {
+        display: none;
+    }
+}
+
 
 
 

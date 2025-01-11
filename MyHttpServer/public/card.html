@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/card.css">
+    <link rel="stylesheet" href="css/cardMobileStyle.css">
 </head>
 <body>
     <div class="first-image" onclick="location.href='/films'">
@@ -133,9 +134,8 @@
 
             <div class="filter-container">
                 <h2>Поиск по параметрам</h2>
-        
+
                 <div class="filter-group">
-                    <label for="genre">Выберите жанр</label>
                     <select id="genre">
                         <option value="">Выберите жанр</option>
                         <option value="action">Боевик</option>
@@ -143,9 +143,8 @@
                         <option value="drama">Драма</option>
                     </select>
                 </div>
-        
+
                 <div class="filter-group">
-                    <label for="country">Выберите страну</label>
                     <select id="country">
                         <option value="">Выберите страну</option>
                         <option value="usa">США</option>
@@ -153,43 +152,43 @@
                         <option value="japan">Япония</option>
                     </select>
                 </div>
-        
+
                 <div class="filter-group">
                     <label>Год</label>
-                    <input type="range" id="year" min="1915" max="2024" step="1">
-                    <div class="range-labels">
-                        <span>1915</span>
-                        <span>2024</span>
+                    <div class="range-group">
+                        <span class="range-label">год 1915</span>
+                        <input type="range" id="year" min="1915" max="2025" step="1">
+                        <span class="range-label">год 2025</span>
                     </div>
                 </div>
-        
+
                 <div class="filter-group">
                     <label>КП</label>
-                    <input type="range" id="kp" min="0" max="10" step="1">
-                    <div class="range-labels">
-                        <span>0</span>
-                        <span>10</span>
+                    <div class="range-group">
+                        <span class="range-label">КП 0</span>
+                        <input type="range" id="kp" min="0" max="10" step="1">
+                        <span class="range-label">КП 10</span>
                     </div>
                 </div>
-        
+
                 <div class="filter-group toggle-options">
-                    <label><input type="checkbox" id="movies"> Фильмы</label>
-                    <label><input type="checkbox" id="series"> Сериалы</label>
-                    <label><input type="checkbox" id="cartoons"> Мультфильмы</label>
-                    <label><input type="checkbox" id="anime"> Аниме</label>
+                    <label><input type="radio" name="type" id="movies" checked> Фильмы</label>
+                    <label><input type="radio" name="type" id="series"> Сериалы</label>
+                    <label><input type="radio" name="type" id="cartoons"> Мультфильмы</label>
+                    <label><input type="radio" name="type" id="anime"> Аниме</label>
                 </div>
-        
+
                 <div class="filter-group">
-                    <label for="sort">Сортировка</label>
                     <select id="sort">
                         <option value="default">По умолчанию</option>
                         <option value="asc">По возрастанию</option>
                         <option value="desc">По убыванию</option>
                     </select>
                 </div>
-        
+
                 <button>ПОИСК</button>
             </div>
+
         </section>
 
         <section class="main-video">

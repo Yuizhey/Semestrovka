@@ -14,16 +14,29 @@
     .first-image,
     .header-first-list,
     .header-form,
-    .header-first-login,
+    .header-first-logo,
     .header-second{
         display: none;
     }
 
+    .header-first-login{
+        
+    }
+    
     header{
         display: flex;
         justify-content: space-between;
     }
+    .header-first{
+        display: flex;
+        justify-content: space-between;
+        gap: 50%;
+    }
 
+    .main-buttons{
+        padding-top: 40px;
+    }
+    
     .main-cards {
         padding-left: 10px;
         padding-right: 10px;

@@ -71,7 +71,7 @@ public class CardPageEndpoint : EndpointBase
             // Проверяем авторизацию пользователя
             if (!AuthorizedHelper.IsAuthorized(Context))
             {
-                return Json(new { success = false, message = "Чтобы ставить реакции вы должны быть авторизованы." });
+                return Json(new { success = false, message = "Чтобы ставить реакции вы должны войти в аккаунт." });
             }
 
             var jsonString = System.Text.Json.JsonSerializer.Serialize(obj);

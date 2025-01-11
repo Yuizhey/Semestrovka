@@ -396,72 +396,94 @@ input:focus {
 }
 
 .filter-container {
-    background-color: #f3f3f3;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 20px;
-    width: 300px;
+    background-color: #e6e6e6;
+    padding: 15px;
+    width: 280px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
 }
 
 .filter-container h2 {
-    margin: 0 0 20px;
-    font-size: 18px;
+    margin: 0 0 15px;
+    font-size: 16px;
+    color: #333;
     text-align: center;
 }
 
 .filter-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
-.filter-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.filter-group select,
-.filter-group input[type="range"] {
+.filter-group select {
     width: 100%;
     padding: 5px;
-    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #fff;
 }
 
-.filter-group .range-labels {
+.range-group {
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    gap: 5px;
+}
+
+.range-label {
     font-size: 12px;
+    color: #666;
 }
 
-.filter-group .toggle-options {
+input[type="range"] {
+    flex-grow: 1;
+    -webkit-appearance: none;
+    height: 5px;
+    background: #ddd;
+    outline: none;
+    border-radius: 5px;
+    margin: 0 5px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #4caf50;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.toggle-options {
     display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.filter-group .toggle-options label {
+.toggle-options label {
     font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
-.filter-group .toggle-options input {
-    margin-right: 5px;
-}
-
-.filter-container button {
-    width: 50px;
-    padding:0 20px;
-    height: 40px;
+button {
+    width: 100%;
+    padding: 10px;
     background-color: #4caf50;
     color: #fff;
     border: none;
     border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
     cursor: pointer;
-    font-size: 16px;
+    text-transform: uppercase;
 }
 
-.filter-container button:hover {
+button:hover {
     background-color: #45a049;
 }
+
 
 
 .main-video {
