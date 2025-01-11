@@ -83,7 +83,7 @@ a {
     background-color: white;
 }
 input:focus {
-    outline: none; 
+    outline: none;
 }
 .header-form-div-image{
     height: 100%;
@@ -467,7 +467,7 @@ input[type="range"]::-webkit-slider-thumb {
     gap: 5px;
 }
 
-button {
+.filter-search {
     width: 100%;
     padding: 10px;
     background-color: #4caf50;
@@ -480,7 +480,7 @@ button {
     text-transform: uppercase;
 }
 
-button:hover {
+.filter-search:hover {
     background-color: #45a049;
 }
 

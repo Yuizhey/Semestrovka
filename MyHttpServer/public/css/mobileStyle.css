@@ -14,8 +14,9 @@
     .first-image,
     .header-first-list,
     .header-form,
-    .header-first-logo,
-    .header-second{
+    .header-first-login,
+    .header-second,
+    .filter-container{
         display: none;
     }
 
