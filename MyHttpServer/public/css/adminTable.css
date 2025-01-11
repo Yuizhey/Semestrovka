@@ -2,6 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 20px;
 }
+
 .back-button {
     position: absolute;
     top: 10px;
@@ -15,61 +16,80 @@ body {
     cursor: pointer;
     border: none;
 }
+
 .back-button:hover {
     background-color: #0056b3;
 }
+
 .flex-container {
     display: flex;
     justify-content: space-between;
     gap: 20px;
 }
+
 .container {
     flex: 2;
     max-width: 800px;
     margin: 50px auto;
 }
+
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
+
 table th, table td {
     border: 1px solid #ddd;
     padding: 10px;
     text-align: center;
+    word-wrap: break-word; /* Перенос текста */
+    max-width: 200px; /* Ограничение ширины */
 }
+
 table th {
     background-color: #f4f4f4;
 }
+
 table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
+
 table tr:hover {
     background-color: #f1f1f1;
 }
+
+/* Секция формы */
 .form-section {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 20px;
     margin-top: 20px;
+    position: sticky; /* Закрепляем секцию */
+    top: 20px; /* Отступ сверху */
+    height: fit-content;
 }
+
 .form-container {
     padding: 15px;
     background-color: #f4f4f4;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
+
 .form-container h2 {
     margin-bottom: 10px;
     font-size: 16px;
 }
+
 .form-container label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
     font-size: 14px;
 }
+
 .form-container input {
     width: calc(100% - 20px);
     padding: 8px;
@@ -78,6 +98,7 @@ table tr:hover {
     border-radius: 5px;
     font-size: 14px;
 }
+
 .form-container button {
     background-color: #007bff;
     color: white;
@@ -87,9 +108,11 @@ table tr:hover {
     font-size: 14px;
     cursor: pointer;
 }
+
 .form-container button:hover {
     background-color: #0056b3;
 }
+
 .form-container button:disabled {
     background-color: #ccc;
     cursor: not-allowed;

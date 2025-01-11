@@ -1,0 +1,81 @@
+@media (max-width: 480px) {
+
+    * {
+        box-sizing: border-box; 
+    }
+
+    .header,
+    .main,
+    .footer{
+        width: 100%;
+    }
+
+    .first-image,
+    .header-first-list,
+    .header-form,
+    .header-first-login,
+    .header-second,
+    .filter-container{
+        display: none;
+    }
+
+    header{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .main-filmAbout{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .main-filmAbout-image{
+        justify-self: center;
+    }
+    .main-filmAbout-info{
+        width: 100%;
+    }
+    .main-filmAbout-info-description{
+        width: 100%;
+    }
+    .main-filmAbout-info-full{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .fullSecond-marks{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+    }
+    
+    .main-video,.main-video-iframe{
+        width: 100%;
+    }
+    
+    
+    .main-anotherFilms-list {
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+
+    .footer{
+        display: block;
+        height: 200px;
+        padding: 20px;
+    }
+    .footer-info-logo{
+        display: none;
+    }
+    .footer-info{
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .footer-menu{
+        text-align: center;
+    }
+}
