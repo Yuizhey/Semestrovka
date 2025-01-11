@@ -14,29 +14,47 @@ namespace MyHttpServer.Endpoints;
 public class CardPageEndpoint : EndpointBase
 {
     [Get("card")]
-    public IHttpResponseResult GetCardPage(int id)
+public IHttpResponseResult GetCardPage(int id)
+{
+    string renderedHtml;
+    var engine = new HtmlTemplateEngine();
+    string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "public", "card.html");
+    var fileText = File.ReadAllText(filePath);
+    
+    try
     {
-        string renderedHtml;
-        var engine = new HtmlTemplateEngine();
-        string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "public", "card.html");
-        var fileText = File.ReadAllText(filePath);
-        // var template = TemplateStorage.MovieDetailsTemplate;
         using (var dbConnection = new SqlConnection(AppConfig.GetInstance().ConnectionString))
         {
             var context = new OrmContext<Movie>(dbConnection);
-            var movie = context.ReadById(id,"Movies");
-            // var contextSecond = new OrmContext<MovieStatistic>(dbConnection);// Получение всех записей из таблицы
-            // var stats = contextSecond.FirstOrDefault(m => m.Movie_Id == movie.Id);
-            // var contextThird = new OrmContext<MovieDetails>(dbConnection);
-            // var details = contextThird.FirstOrDefault(m => m.MovieId == movie.Id);
-            // var contextFour = new OrmContext<Producer>(dbConnection);
-            // var producer = contextFour.FirstOrDefault(m=> m.Id == details.ProducerId);
+            var movie = context.ReadById(id, "Movies");
+            
+            // Если фильм не найден, возвращаем JSON с сообщением
+            if (movie == null)
+            {
+                return Json("Information about movie not found" );
+            }
+
             var contextSecond = new OrmContext<MovieDetails>(dbConnection);
             var details = contextSecond.GetAll("MovieDetails").FirstOrDefault(x => x.MovieId == movie.Id);
+            
+            // Проверяем наличие деталей фильма
+            if (details == null)
+            {
+                return Json("Information about movie not found");
+            }
+
             var contextThird = new OrmContext<MovieStatistic>(dbConnection);
             var stats = contextThird.GetAll("MovieStatistic").FirstOrDefault(x => x.Movie_Id == movie.Id);
+            
+            // Проверяем наличие статистики фильма
+            if (stats == null)
+            {
+                return Json("Information about movie not found");
+            }
+
             var contextFour = new OrmContext<Producer>(dbConnection);
             var producer = contextFour.GetAll("Producer").FirstOrDefault(x => x.Id == details.ProducerId);
+
             var obj = new CardPageMovie
             {
                 RuTitle = movie.RuTitle,
@@ -49,19 +67,26 @@ public class CardPageEndpoint : EndpointBase
                 Dislikes_Count = stats.Dislikes_Count,
                 MovieDescription = details.MovieDescription,
                 Country = details.Country,
-                Name = producer.Name,
+                Name = producer?.Name ?? "Неизвестный", // Если продюсер не найден
                 Quality = details.Quality,
                 VideoURL = details.VideoURL
             };
             renderedHtml = engine.Render(fileText, obj);
         }
+
         if (!AuthorizedHelper.IsAuthorized(Context))
         {
             return Html(engine.Render(renderedHtml, "{data}", "ВОЙТИ"));
         }
-        renderedHtml = engine.Render(renderedHtml, "{login}", AuthorizedHelper.GetUserLogin(Context.Request.Cookies.FirstOrDefault(c => c.Name=="session-token").Value));
+        
+        renderedHtml = engine.Render(renderedHtml, "{login}", AuthorizedHelper.GetUserLogin(Context.Request.Cookies.FirstOrDefault(c => c.Name == "session-token").Value));
         return Html(engine.Render(renderedHtml, "{data}", "КАБИНЕТ"));
     }
+    catch (Exception ex)
+    {
+        return Html(ex.Message);
+    }
+}
 
     [Post("card/reaction")]
     public IHttpResponseResult PutReaction(Object obj)
