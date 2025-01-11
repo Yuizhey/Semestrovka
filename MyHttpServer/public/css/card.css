@@ -656,3 +656,11 @@ input[type="range"]::-webkit-slider-thumb {
 .footer-menu-list-item-link:hover{
     color: greenyellow;
 }
+
+.main-filmAbout-info-fullFirst span,.fullSecond-quality-1{
+    font-weight: bold;
+}
+
+.main-filmAbout-info-description{
+    color: gray;
+}

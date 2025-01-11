@@ -13,7 +13,7 @@
     .first-image,
     .header-first-list,
     .header-form,
-    .header-first-login,
+    /*.header-first-login,*/
     .header-second,
     .filter-container{
         display: none;
@@ -77,5 +77,54 @@
     }
     .footer-menu{
         text-align: center;
+    }
+
+    .modal-content {
+        margin: 10% 5%;
+        padding: 20px;
+    }
+
+    .modal-content h2 {
+        font-size: 1.3em;
+    }
+
+    .modal-content img {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 10px;
+    }
+
+    .modal-content input {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .modal-content button {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .modal-content .links {
+        flex-direction: column;
+        margin-top: 15px;
+        font-size: 0.8em;
+    }
+
+    .modal-content .links a {
+        margin-bottom: 5px;
+    }
+
+    .remember {
+        width: 100%;
+    }
+
+    .cabinet-options {
+        grid-template-columns: 1fr;
+    }
+
+    .cabinet-options button {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
     }
 }
