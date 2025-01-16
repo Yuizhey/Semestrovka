@@ -8,9 +8,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\MyHttpServerLibrary\MyHttpServerLibrary.csproj" />
-      <ProjectReference Include="..\MyORMLibrary\MyORMLibrary.csproj" />
-      <ProjectReference Include="..\TemplateEngine\TemplateEngine.csproj" />
+      <ProjectReference Include="..\HttpServerLib\HttpServerLib.csproj" />
+      <ProjectReference Include="..\MyORMLIb\MyORMLIb.csproj" />
+      <ProjectReference Include="..\Template_Engine\Template_Engine.csproj" />
     </ItemGroup>
 
     <ItemGroup>
