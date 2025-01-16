@@ -1,0 +1,10 @@
+INSERT INTO LordfilmDB.dbo.MovieStatistic (Id, KP_Rating, IMDB_Rating, Likes_Count, Dislikes_Count, Movie_Id) VALUES (1, 6.1, 6.1, 9525, 2014, 1);
+INSERT INTO LordfilmDB.dbo.MovieStatistic (Id, KP_Rating, IMDB_Rating, Likes_Count, Dislikes_Count, Movie_Id) VALUES (2, 8.2, 7.6, 11762, 1043, 2);
+INSERT INTO LordfilmDB.dbo.MovieStatistic (Id, KP_Rating, IMDB_Rating, Likes_Count, Dislikes_Count, Movie_Id) VALUES (3, 8.0, 9.4, 5448, 1750, 3);
+INSERT INTO LordfilmDB.dbo.MovieStatistic (Id, KP_Rating, IMDB_Rating, Likes_Count, Dislikes_Count, Movie_Id) VALUES (4, 7.3, 7.9, 6967, 1283, 4);
+INSERT INTO LordfilmDB.dbo.MovieStatistic (Id, KP_Rating, IMDB_Rating, Likes_Count, Dislikes_Count, Movie_Id) VALUES (5, 8.1, 7.4, 7438, 577, 5);
+INSERT INTO LordfilmDB.dbo.MovieStatistic (Id, KP_Rating, IMDB_Rating, Likes_Count, Dislikes_Count, Movie_Id) VALUES (6, 8.8, 9.4, 8947, 1497, 6);
+INSERT INTO LordfilmDB.dbo.MovieStatistic (Id, KP_Rating, IMDB_Rating, Likes_Count, Dislikes_Count, Movie_Id) VALUES (7, 8.2, 7.9, 6176, 535, 7);
+INSERT INTO LordfilmDB.dbo.MovieStatistic (Id, KP_Rating, IMDB_Rating, Likes_Count, Dislikes_Count, Movie_Id) VALUES (10, 7.9, 8.2, 4159, 815, 8);
+INSERT INTO LordfilmDB.dbo.MovieStatistic (Id, KP_Rating, IMDB_Rating, Likes_Count, Dislikes_Count, Movie_Id) VALUES (11, 6.6, 6.6, 6174, 781, 10);
+INSERT INTO LordfilmDB.dbo.MovieStatistic (Id, KP_Rating, IMDB_Rating, Likes_Count, Dislikes_Count, Movie_Id) VALUES (12, 6.0, 6.2, 4562, 1898, 11);
