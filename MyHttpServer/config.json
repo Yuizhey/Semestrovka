@@ -1,0 +1,13 @@
+{
+  "ConnectionString": "Data Source=localhost;Initial Catalog=LordfilmDB;User ID=sa;Password=P@ssw0rd;",
+  "Domain": "*",
+  "Port": "8080",
+  "Path": "public/",
+  "EmailServiceConfiguration": {
+    "SmtpServer": "smtp.example.com",
+    "Port": 587,
+    "UserName": "user@example.com",
+    "Password": "your_password",
+    "UseSSL": true
+  }
+}
